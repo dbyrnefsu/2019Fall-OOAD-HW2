@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.fitchburgstate.csc7400.hw2.Guitar;;
+import edu.fitchburgstate.csc7400.hw2.Guitar;
 
 /**
  * Simple tests for guitar class methods

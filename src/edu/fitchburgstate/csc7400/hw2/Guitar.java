@@ -29,11 +29,11 @@ public class Guitar {
 	 * @param topWood the wood used for the guitar's face
 	 * @param numString the number of strings for this guitar
 	 */
-	public Guitar(String serialNumber, 
-			double price, 
-			String manufacturer, 
-			String model, 
-			String type, 
+	public Guitar(String serialNumber,
+			double price,
+			String manufacturer,
+			String model,
+			String type,
 			String backWood,
 			String topWood,
 			Integer numStrings) {

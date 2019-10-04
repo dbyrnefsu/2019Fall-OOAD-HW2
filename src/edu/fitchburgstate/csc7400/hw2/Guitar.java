@@ -13,9 +13,10 @@ package edu.fitchburgstate.csc7400.hw2;
  * Rick's music store
  * 
  * @author HeadFirstOODA
+ * @author xia.jin
  *
  */
-public class Guitar {
+public class Guitar implements GuitarInterface{
 
 	/**
 	 * Full constructor
@@ -31,11 +32,11 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
+			Type type,
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Wood backWood,
+			Wood topWood,
 			Integer numStrings) {
 		this.serialNumber = serialNumber;
 		this.price = price;
@@ -46,6 +47,30 @@ public class Guitar {
 		this.topWood = topWood;
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
+		spec = new GuitarSpec(this.manufacturer, 
+				this.type, 
+				this.backWood, 
+				this.topWood, 
+				this.model);
+	}
+
+	public Guitar(String serialNumber, double price, String manufacturer, String type, String model, 
+			String backWood, String topWood, Integer numStrings) {
+		this.serialNumber = serialNumber;
+		this.price = price;
+		this.manufacturer = Manufacturer.valueOf(manufacturer.toUpperCase());
+		this.model = model;
+		this.type = Type.valueOf(type.toUpperCase());
+		this.backWood = Wood.valueOf(backWood.toUpperCase());
+		this.topWood = Wood.valueOf(topWood.toUpperCase());
+		if (numStrings == null) this.numberOfStrings = 0;
+		else this.numberOfStrings = numStrings;
+		spec = new GuitarSpec(this.manufacturer, 
+				this.type, 
+				this.backWood, 
+				this.topWood, 
+				this.model);
+
 	}
 
 	/**
@@ -72,13 +97,15 @@ public class Guitar {
 	/**
 	 * Returns the name of the manufacturer
 	 */
-	public String getManufacturer() {
+	@Override
+	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
 	/**
 	 * Returns the manufacturer model
 	 */
+	@Override
 	public String getModel() {
 		return model;
 	}
@@ -87,21 +114,24 @@ public class Guitar {
 	 * Returns the guitar type
 	 * @return
 	 */
-	public String getType() {
+	@Override
+	public Type getType() {
 		return type;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public String getBackWood() {
+	@Override
+	public Wood getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public String getTopWood() {
+	@Override
+	public Wood getTopWood() {
 		return topWood;
 	}
 	
@@ -111,14 +141,76 @@ public class Guitar {
 	public int getNumberOfStrings() {
 		return numberOfStrings;
 	}
-
 	/**
-	 * Turn object into a readable string
+	 * Returns the spec of the guitar
+	 * @return
+	 */
+	public GuitarSpec getGuitarSpec() {
+		return spec;
+	}
+	
+	/**
+	 * Turns a guitar object into a readable string
 	 */
 	public String toString() {
 		return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
 	}
 
+	/**
+	 * Compare with another guitar by comparing
+	 * each and every of the following values:
+	 * serialNumber, price, manufacturer, model, 
+	 * type, backWood, topWood, numStrings.
+	 * If all values are the same, return true. 
+	 * If any values are not the same, return false.
+	 * @return returns true if all values are the same,
+	 * returns false if not all values the same.
+	 */
+	public boolean equals(Guitar other) {
+		if(!this.serialNumber.equals(other.serialNumber))
+			return false;
+		if(this.price != other.price) 
+			return false;
+		if(this.manufacturer != other.manufacturer)
+			return false;
+		if(!this.model.equals(other.model))
+			return false;
+		if(this.type != other.type)
+			return false;
+		if(this.topWood != other.topWood)
+			return false;
+		if(this.backWood != other.backWood)
+			return false;
+		if(this.numberOfStrings != other.numberOfStrings)
+			return false;
+		return true;
+	}
+	
+	/**
+	 * Match with other guitar specification by comparing
+	 * the following values if specified in other guitar specification: 
+	 * manufacturer, type, backWood, topWood, model.
+	 * If any value is unspecified in other guitar specification, 
+	 * then will not compare this value.
+	 * @param otherSpec other guitar specification
+	 * @return return true if all specified values in other guitar specification are the same.
+	 * return false if any specified values in other guitar specification is not the same.
+	 */
+	public boolean matches(GuitarSpec otherSpec) {
+		System.out.println("GuitarSpec for search: " + otherSpec.toString());
+		System.out.println("Current guitar:        " + this.toString());
+		if(otherSpec.getManufacturer()!=null && otherSpec.getManufacturer()!=this.manufacturer)
+			return false;
+		if(otherSpec.getType()!=null && otherSpec.getType()!=this.type)
+			return false;
+		if(otherSpec.getBackWood()!=null && otherSpec.getBackWood()!= this.backWood)
+			return false;
+		if(otherSpec.getTopWood()!=null && otherSpec.getTopWood()!= this.topWood)
+			return false;
+		if(otherSpec.getModel()!= null && !otherSpec.getModel().equals(this.model))
+			return false;
+		return true;
+	}
 	/**
 	 * The guitars manufacturer serial number
 	 */
@@ -127,7 +219,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private Manufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,17 +229,17 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private Type type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private Wood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private Wood topWood;
 
 	/**
 	 * Rick's price for the guitar
@@ -159,6 +251,10 @@ public class Guitar {
 	 */
 	private int numberOfStrings;
 
+	/**
+	 * The specification of this guitar
+	 */
+	private GuitarSpec spec;
 	/**
 	 * Formatting string for toString()
 	 */

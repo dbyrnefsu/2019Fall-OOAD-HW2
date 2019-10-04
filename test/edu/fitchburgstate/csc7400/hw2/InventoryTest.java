@@ -8,7 +8,10 @@
 package edu.fitchburgstate.csc7400.hw2;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
+import java.util.List;
+import java.util.LinkedList;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -71,7 +74,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_add() {
-		Guitar g1 = new Guitar("122784x", 5495.95, "MARTIN",  "ACOUSTIC", "D-18","MAHOGANY", "ALDER", 12);
+		Guitar g1 = new Guitar("122784x", 5495.95, "MARTIN",  "ACOUSTIC", "D-18","MAHOGANY", "ALDER", 12);		
 		this.guitarInventory.addGuitar("122784x", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ALDER", 12);
 		Guitar sg1 = this.guitarInventory.getGuitar("122784x");
 		Assert.assertTrue(this.guitarEquals(g1, sg1));
@@ -82,9 +85,9 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search() {
-		Guitar searchGuitar = new Guitar(null, 0, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
+		GuitarSpec searchGuitarSpec = new GuitarSpec( "FENDER", "ELECTRIC", "ALDER", "ALDER", "Stratocastor");
 		String[] serialNumbers = { "V95693","V9512" };
-		this.searchTester(searchGuitar, serialNumbers);
+		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
 
 	/**
@@ -92,9 +95,9 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_case() {
-		Guitar searchGuitar = new Guitar(null, 0, "Fender", "Electric", "stratocastor", "Alder", "Alder", null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec("Fender", "Electric", "Alder", "Alder", "stratocastor");
 		String[] serialNumbers = { "V95693","V9512" };
-		this.searchTester(searchGuitar, serialNumbers);
+		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
 
 	/**
@@ -102,24 +105,25 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_manufacturer() {
-		Guitar searchGuitar = new Guitar(null, 0, "GIBSON", null, null, null, null, null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec("GIBSON", null, null, null, null);
 		String[] serialNumbers = { "70108276","82765501" };
-		this.searchTester(searchGuitar, serialNumbers);
+		this.searchTester(searchGuitarSpec, serialNumbers);
 
-		searchGuitar = new Guitar(null, 0, "COLLINGS", null, null, null, null, null);
+		searchGuitarSpec = new GuitarSpec("COLLINGS", null, null, null, null);
 		String[] serialNumbers2 = { "11277" };
-		this.searchTester(searchGuitar, serialNumbers2);
+		this.searchTester(searchGuitarSpec, serialNumbers2);
 	}
 	
 	/**
 	 * Test search with just type
-	 */
+	 *
+	 */ 
 	@Test
 	public void test_search_type() {
 	
-		Guitar searchGuitar = new Guitar(null, 0, null, "ACOUSTIC", null, null, null, null);
-		String[] serialNumbers = { "11277","122784", "76531", "77023", "1092", "566-62" };
-		this.searchTester(searchGuitar, serialNumbers);
+		GuitarSpec searchGuitarSpec = new GuitarSpec( null, "ACOUSTIC", null, null, null);
+		String[] serialNumbers = { "11277","122784", "76531", "77023", "1092", "566-62","GPC12PA4","122784x" };
+		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
 	
 	/**
@@ -127,28 +131,32 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_2Attrib() {
-		Guitar searchGuitar = new Guitar(null, 0, "MARTIN", null, null, "BRAZILIAN_ROSEWOOD", null, null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec( "MARTIN", null, "BRAZILIAN_ROSEWOOD", null, null);
 		String[] serialNumbers = { "76531","77023" };
-		this.searchTester(searchGuitar, serialNumbers);
+		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
 	
 	/**
 	 * Test search with string
+	 * No search for numstrings, it is not part of GuitarSpec
 	 */
-	@Test
+	/*
+	 * @Test
+	 
 	public void test_search_numstrings() {
 		Guitar searchGuitar = new Guitar(null, 0, null, null, null, null, null, 12);
 		String[] serialNumbers = { "GPC12PA4" };
 		this.searchTester(searchGuitar, serialNumbers);
 }
-	
+	*/
 	/**
 	 * Test to make sure nothing comes back if no match
+	 * Add LEXUS to Manufacturer enum???
 	 */
 	@Test
 	public void test_search_notFound() {
-		Guitar searchGuitar = new Guitar(null, 0, "LEXUS", null, null, null, null, null);
-		Assert.assertNull("Should not have found any guitars", this.guitarInventory.search(searchGuitar));
+		GuitarSpec searchGuitarSpec = new GuitarSpec("LEXUS", null, null, null, null);
+		Assert.assertNull("Should not have found any guitars", this.guitarInventory.search(searchGuitarSpec));
 	}
 	
 	/**
@@ -157,9 +165,9 @@ public class InventoryTest {
 	 * @param searchGuitar the search specs
 	 * @param serialNumbers the serial numbers we expect
 	 */
-	private void searchTester(Guitar searchGuitar, String[] serialNumbers) {
-		Guitar matchingGuitar = this.guitarInventory.search(searchGuitar);
-		this.checkGuitarList(matchingGuitar, serialNumbers);
+	private void searchTester(GuitarSpec searchGuitarSpec, String[] serialNumbers) {
+		List<Guitar> matchedGuitars = this.guitarInventory.search(searchGuitarSpec);
+		this.checkGuitarList(matchedGuitars, serialNumbers);
 	}
 
 	/**
@@ -169,13 +177,17 @@ public class InventoryTest {
 	 * @param matchingGuitar the matching guitar
 	 * @param serialNumbers the serial numbers we expect
 	 */
-	private void checkGuitarList(Guitar matchingGuitar, String[] serialNumbers) {
+	private void checkGuitarList(List<Guitar> matchedGuitars, String[] serialNumbers) {
 
 		Set<String> shouldFind = new HashSet<String>();
 		for (String str: serialNumbers) {
 			shouldFind.add(str);
 		}
-		Assert.assertTrue(shouldFind.contains(matchingGuitar.getSerialNumber()));
+		for (Iterator<Guitar> it = matchedGuitars.iterator(); it.hasNext();) {
+			Guitar g = it.next();
+			Assert.assertTrue(shouldFind.contains(g.getSerialNumber()));
+		}
+		
 	}
 
 	/**
@@ -186,20 +198,20 @@ public class InventoryTest {
 	 * @return true if g1 and g2 are equal
 	 */
 	private boolean guitarEquals(Guitar g1, Guitar g2) {
-		String manufacturer = g1.getManufacturer();
-		if ((!manufacturer.equalsIgnoreCase(g2.getManufacturer())))
+		String manufacturer = g1.getManufacturer().toString();
+		if (!manufacturer.equalsIgnoreCase(g2.getManufacturer().toString()))
 			return false;
 		String model = g1.getModel();
 		if (!model.equalsIgnoreCase(g2.getModel()))
 			return false;
-		String type = g1.getType();
-		if (!type.equalsIgnoreCase(g2.getType()))
+		String type = g1.getType().toString();
+		if (!type.equalsIgnoreCase(g2.getType().toString()))
 			return false;
-		String backWood = g1.getBackWood();
-		if (!backWood.equalsIgnoreCase(g2.getBackWood()))
+		String backWood = g1.getBackWood().toString();
+		if (!backWood.equalsIgnoreCase(g2.getBackWood().toString()))
 			return false;
-		String topWood = g1.getTopWood();
-		if (!topWood.equalsIgnoreCase(g2.getTopWood()))
+		String topWood = g1.getTopWood().toString();
+		if (!topWood.equalsIgnoreCase(g2.getTopWood().toString()))
 			return false;
 		return true;
 	}

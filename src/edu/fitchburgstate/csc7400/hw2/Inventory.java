@@ -44,15 +44,15 @@ public class Inventory {
 	 * @param price
 	 *            the customer price
 	 * @param manufacturer
-	 *            the guitar's manufacturer
+	 *            the guitar's manufacturer, enum Manufacturer
 	 * @param model
 	 *            the manufacturer model id
 	 * @param type
 	 *            type of guitar
-	 * @param topWood
-	 *            wood used in front of guitar
 	 * @param backWood
 	 *            wood used in back of guitar
+	 * @param topWood
+	 *            wood used in front of guitar
 	 * @param numStrings
 	 *            the number of strings
 	 * 
@@ -65,8 +65,8 @@ public class Inventory {
 	 * @precondition backWood != null
 	 * @precondition numStrings >= 6 or null
 	 */
-	public void addGuitar(String serialNumber, double price, String manufacturer, String type, String model,
-			String topWood, String backWood, Integer numStrings) {
+	public void addGuitar(String serialNumber, double price, Manufacturer manufacturer, Type type, String model, 
+			Wood backWood, Wood topWood, Integer numStrings) {	
 		assert serialNumber != null;
 		assert price > 0;
 		assert manufacturer != null;
@@ -75,11 +75,36 @@ public class Inventory {
 		assert topWood != null;
 		assert backWood != null;
 		assert numStrings >= 0;
-		
-		Guitar guitar = new Guitar(serialNumber, price, manufacturer, type, model, topWood, backWood, numStrings);
+			
+		Guitar guitar = new Guitar(serialNumber, price, manufacturer, type, model, backWood, topWood, numStrings);
 		this.addGuitar(guitar);
 	}
-
+	/**
+	 * Constructor, input value for manufacturer, type, backWood, topWood are strings instead of enum types
+	 * @param serialNumber
+	 * @param price
+	 * @param manufacturer
+	 * @param model
+	 * @param type
+	 * @param backWood
+	 * @param topWood
+	 * @param numStrings
+	 */
+	public void addGuitar(String serialNumber, double price, String manufacturer, String model, String type,
+			String backWood, String topWood, Integer numStrings) {
+		assert serialNumber != null;
+		assert price > 0;
+		assert manufacturer != null;
+		assert type != null;
+		assert model != null;
+		assert topWood != null;
+		assert backWood != null;
+		assert numStrings >= 0;
+			
+		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model, type, backWood, topWood, numStrings);
+		this.addGuitar(guitar);
+		
+	}
 	/**
 	 * Finds and returns a guitar that has the provided serial number
 	 * 
@@ -98,42 +123,29 @@ public class Inventory {
 	}
 
 	/**
-	 * Finds and returns a guitar that matches a provided guitar. Any null in
-	 * spec are consider wildcards.
+	 * Finds and returns an inventory of guitars that matches a guitar spec. 
+	 * Any null in spec are consider wildcards.
 	 * 
 	 * @param searchGuitar
 	 *            the guitar with qualities we want to match
 	 * @return the found guitar, may be null
 	 */
-	public Guitar search(Guitar searchGuitar) {
-		String manufacturer = searchGuitar.getManufacturer();
-		String model = searchGuitar.getModel();
-		String type = searchGuitar.getType();
-		String backWood = searchGuitar.getBackWood();
-		String topWood = searchGuitar.getTopWood();
-		int numString = searchGuitar.getNumberOfStrings();
-
+	public List<Guitar> search(GuitarSpec searchSpec) {
+		List<Guitar> matchedGuitars = new LinkedList<Guitar>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 			// Ignore serial number since that's unique
 			// Ignore price since that's unique
-			if ((manufacturer != null) && (!manufacturer.equals(""))
-					&& (!manufacturer.equalsIgnoreCase(guitar.getManufacturer())))
-				continue;
-			if ((model != null) && (!model.equals("")) && (!model.equalsIgnoreCase(guitar.getModel())))
-				continue;
-			if ((type != null) && (!type.equals("")) && (!type.equalsIgnoreCase(guitar.getType())))
-				continue;
-			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equalsIgnoreCase(guitar.getBackWood())))
-				continue;
-			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equalsIgnoreCase(guitar.getTopWood())))
-				continue;
-			if (numString != 0 && numString != guitar.getNumberOfStrings())
-				continue;
-			return guitar;
+			if (guitar.getGuitarSpec().matches(searchSpec))
+				matchedGuitars.add(guitar);
+		
 		}
-		return null;
+		if(matchedGuitars.size()>0)
+			return matchedGuitars;
+		else return null;
 	}
 
 	private List<Guitar> guitars; // guitar inventory
+
+
 }

@@ -31,11 +31,11 @@ class GuitarTest {
 		this.testGuitar = new Guitar(
 				"AB123", // serial number
 				203.35, // store price
-				"Gibson", // Manufacturer
+				Manufacturer.GIBSON, // Manufacturer
+				Type.ELECTRIC, // Type of Guitar
 				"EasyLearn", // Manufacturer model
-				"electric", // Type of Guitar
-				"Maple", // Back wood
-				"Adirondack", // Face wood
+				Wood.MAPLE, // Back wood
+				Wood.ADIRONDACK, // Face wood
 				6 // number of strings
 				);
 	}
@@ -77,8 +77,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getManufacturer() {
-		String expected = "Gibson";
-		String returned = this.testGuitar.getManufacturer();
+		String expected = "GIBSON";
+		String returned = this.testGuitar.getManufacturer().toString();
 		assertEquals(expected, returned, String.format("Manufacturer %s != %s", expected, returned));
 	}
 
@@ -97,8 +97,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getType() {
-		String expected = "electric";
-		String returned = this.testGuitar.getType();
+		Type expected = Type.ELECTRIC;
+		Type returned = this.testGuitar.getType();
 		assertEquals(expected, returned, String.format("Type %s != %s", expected, returned));
 	}
 
@@ -107,8 +107,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getBackWood() {
-		String expected = "Maple";
-		String returned = this.testGuitar.getBackWood();
+		Wood expected = Wood.MAPLE;
+		Wood returned = this.testGuitar.getBackWood();
 		assertEquals(expected, returned, String.format("Back wood %s != %s", expected, returned));
 	}
 
@@ -117,8 +117,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getTopWood() {
-		String expected = "Adirondack";
-		String returned = this.testGuitar.getTopWood();
+		Wood expected = Wood.ADIRONDACK;
+		Wood returned = this.testGuitar.getTopWood();
 		assertEquals(expected, returned, String.format("Top wood %s != %s", expected, returned));
 	}
 	

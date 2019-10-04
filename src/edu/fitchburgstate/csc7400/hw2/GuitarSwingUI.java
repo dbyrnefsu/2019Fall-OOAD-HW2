@@ -4,6 +4,10 @@
  * Assignment: HW 2
  * 
  * Date: 2017-09-20
+ * Students: @Nodir Nabiev
+ *          : @Chandralekha 
+ * Version 2.0
+ * ModifiedDate: 2019-10-07
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -35,10 +39,7 @@ import javax.swing.text.JTextComponent;
 
 import javax.swing.event.ChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
@@ -288,6 +289,7 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
+
 				String manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
 				String type = getChosen((String) typeComboBox.getSelectedItem());
 				String topWood = getChosen((String) topWoodComboBox.getSelectedItem());
@@ -297,8 +299,8 @@ public class GuitarSwingUI {
 				//double priceLow = (double) lowSpinner.getValue();
 				//double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec(model, Enum.valueOf(Manufacturer.class, manufacturer.toString()), type, topWood, backWood), 0);
+				LinkedList matching = inventory.search(searchGuitar);
 
 				matchingGuitars.clear();
 				if (matching == null) {
@@ -437,7 +439,8 @@ public class GuitarSwingUI {
 	private JTextField txtEnterName;
 	private JTextField txtEnterModel;
 	private JTextField greetingField;
-	
+
+//	private GuitarSpec guitarSpec = new GuitarSpec();
 	private JComboBox<String> manufacturerComboBox;
 	private JComboBox<String> typeComboBox;
 	private JComboBox<String> topWoodComboBox;

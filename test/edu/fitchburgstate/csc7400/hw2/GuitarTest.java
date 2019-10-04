@@ -7,12 +7,10 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.fitchburgstate.csc7400.hw2.Guitar;;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * Simple tests for guitar class methods
@@ -21,23 +19,21 @@ import edu.fitchburgstate.csc7400.hw2.Guitar;;
  */
 class GuitarTest {
 	
-	Guitar testGuitar;
+	private Guitar testGuitar;
+	private GuitarSpec testGuitarSpec;
 
 	/**
 	 * Creates a test class that will be used for testing getters and setters
 	 */
 	@BeforeEach
 	void setUp() {
+		this.testGuitarSpec = new GuitarSpec("EasyLearn", Manufacturer.GIBSON, Type.ELECTRIC, Wood.MAPLE, Wood.ADIRONDACK);
 		this.testGuitar = new Guitar(
 				"AB123", // serial number
-				203.35, // store price
-				"Gibson", // Manufacturer
-				"EasyLearn", // Manufacturer model
-				"electric", // Type of Guitar
-				"Maple", // Back wood
-				"Adirondack", // Face wood
-				6 // number of strings
-				);
+						203.35, // store price
+				this.testGuitarSpec, // Guitar specs
+				6 //number of strings
+						);
 	}
 
 	/**
@@ -78,8 +74,8 @@ class GuitarTest {
 	@Test
 	void test_getManufacturer() {
 		String expected = "Gibson";
-		String returned = this.testGuitar.getManufacturer();
-		assertEquals(expected, returned, String.format("Manufacturer %s != %s", expected, returned));
+		String returned = String.valueOf(this.testGuitarSpec.getManufacturer());
+		assertEquals(expected.toLowerCase(), returned.toLowerCase(), String.format("Manufacturer %s != %s", expected, returned));
 	}
 
 	/**
@@ -88,7 +84,7 @@ class GuitarTest {
 	@Test
 	void test_getModel() {
 		String expected = "EasyLearn";
-		String returned = this.testGuitar.getModel();
+		String returned = this.testGuitarSpec.getModel();
 		assertEquals(expected, returned, String.format("Model %s != %s", expected, returned));
 	}
 
@@ -98,7 +94,7 @@ class GuitarTest {
 	@Test
 	void test_getType() {
 		String expected = "electric";
-		String returned = this.testGuitar.getType();
+		String returned = String.valueOf(this.testGuitarSpec.getType());
 		assertEquals(expected, returned, String.format("Type %s != %s", expected, returned));
 	}
 
@@ -108,7 +104,7 @@ class GuitarTest {
 	@Test
 	void test_getBackWood() {
 		String expected = "Maple";
-		String returned = this.testGuitar.getBackWood();
+		String returned = String.valueOf(this.testGuitarSpec.getBackWood());
 		assertEquals(expected, returned, String.format("Back wood %s != %s", expected, returned));
 	}
 
@@ -118,7 +114,7 @@ class GuitarTest {
 	@Test
 	void test_getTopWood() {
 		String expected = "Adirondack";
-		String returned = this.testGuitar.getTopWood();
+		String returned = String.valueOf(this.testGuitarSpec.getTopWood());
 		assertEquals(expected, returned, String.format("Top wood %s != %s", expected, returned));
 	}
 	

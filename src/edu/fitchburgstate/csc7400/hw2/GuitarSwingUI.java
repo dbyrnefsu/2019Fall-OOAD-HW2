@@ -297,8 +297,8 @@ public class GuitarSwingUI {
 				//double priceLow = (double) lowSpinner.getValue();
 				//double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, backWood, topWood, model);
+				List<Guitar> matching = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
 				if (matching == null) {

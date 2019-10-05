@@ -28,16 +28,18 @@ class GuitarTest {
 	 */
 	@BeforeEach
 	void setUp() {
+		System.out.println("here");
 		this.testGuitar = new Guitar(
 				"AB123", // serial number
 				203.35, // store price
-				"Gibson", // Manufacturer
+				Manufacturer.GIBSON, // Manufacturer
 				"EasyLearn", // Manufacturer model
-				"electric", // Type of Guitar
-				"Maple", // Back wood
-				"Adirondack", // Face wood
+				Type.ELECTRIC, // Type of Guitar
+				Wood.MAPLE, // Back wood
+				Wood.ADIRONDACK, // Face wood
 				6 // number of strings
 				);
+		System.out.println("not here");
 	}
 
 	/**
@@ -77,8 +79,10 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getManufacturer() {
-		String expected = "Gibson";
-		String returned = this.testGuitar.getManufacturer();
+		String expected = "GIBSON";
+		System.out.println(expected);
+		String returned = this.testGuitar.getManufacturer().toString();
+		
 		assertEquals(expected, returned, String.format("Manufacturer %s != %s", expected, returned));
 	}
 
@@ -97,8 +101,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getType() {
-		String expected = "electric";
-		String returned = this.testGuitar.getType();
+		String expected = "ELECTRIC";
+		String returned = this.testGuitar.getType().toString();
 		assertEquals(expected, returned, String.format("Type %s != %s", expected, returned));
 	}
 
@@ -107,8 +111,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getBackWood() {
-		String expected = "Maple";
-		String returned = this.testGuitar.getBackWood();
+		String expected = "MAPLE";
+		String returned = this.testGuitar.getBackWood().toString();
 		assertEquals(expected, returned, String.format("Back wood %s != %s", expected, returned));
 	}
 
@@ -117,8 +121,8 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getTopWood() {
-		String expected = "Adirondack";
-		String returned = this.testGuitar.getTopWood();
+		String expected = "ADIRONDACK";
+		String returned = this.testGuitar.getTopWood().toString();
 		assertEquals(expected, returned, String.format("Top wood %s != %s", expected, returned));
 	}
 	

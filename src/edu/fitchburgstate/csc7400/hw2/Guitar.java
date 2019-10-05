@@ -15,7 +15,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar {
+public class Guitar implements GuitarInterface {
 
 	/**
 	 * Full constructor
@@ -31,11 +31,11 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Type type, 
+			Wood backWood,
+			Wood topWood,
 			Integer numStrings) {
 		this.serialNumber = serialNumber;
 		this.price = price;
@@ -46,6 +46,7 @@ public class Guitar {
 		this.topWood = topWood;
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
+		guitarSpec=new GuitarSpec(manufacturer, type, topWood, backWood, model);
 	}
 
 	/**
@@ -72,7 +73,7 @@ public class Guitar {
 	/**
 	 * Returns the name of the manufacturer
 	 */
-	public String getManufacturer() {
+	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
@@ -87,21 +88,21 @@ public class Guitar {
 	 * Returns the guitar type
 	 * @return
 	 */
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public String getBackWood() {
+	public Wood getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public String getTopWood() {
+	public Wood getTopWood() {
 		return topWood;
 	}
 	
@@ -110,6 +111,45 @@ public class Guitar {
 	 */
 	public int getNumberOfStrings() {
 		return numberOfStrings;
+	}
+
+	/**
+	 * Returns the specification for this guitar
+	 */
+	public GuitarSpec getGuitarSpec() {
+		return guitarSpec;
+	}
+
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	public void setType(Type type) {
+		this.type = type;
+	}
+
+	public void setBackWood(Wood backWood) {
+		this.backWood = backWood;
+	}
+
+	public void setTopWood(Wood topWood) {
+		this.topWood = topWood;
+	}
+
+	public void setNumberOfStrings(int numberOfStrings) {
+		this.numberOfStrings = numberOfStrings;
+	}
+
+	public void setGuitarSpec(GuitarSpec guitarSpec) {
+		this.guitarSpec = guitarSpec;
 	}
 
 	/**
@@ -127,7 +167,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private Manufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,17 +177,17 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private Type type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private Wood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private Wood topWood;
 
 	/**
 	 * Rick's price for the guitar
@@ -158,9 +198,76 @@ public class Guitar {
 	 * Guitars number of strings
 	 */
 	private int numberOfStrings;
+	
+	/**
+	 * Specification of the guitar
+	 */
+	private GuitarSpec guitarSpec;
 
 	/**
 	 * Formatting string for toString()
 	 */
 	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
+
+
+	/**
+	 * Validates if the given guitar specification is equal to other guitar
+	 * specification. 
+	 * @param obj
+	 * @return true if equals, false if not equal
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Guitar other = (Guitar) obj;
+		if (backWood != other.backWood) {
+			return false;
+		}
+		if (guitarSpec == null) {
+			if (other.guitarSpec != null) {
+				return false;
+			}
+		} else if (!guitarSpec.equals(other.guitarSpec)) {
+			return false;
+		}
+		if (manufacturer != other.manufacturer) {
+			return false;
+		}
+		if (model == null) {
+			if (other.model != null) {
+				return false;
+			}
+		} else if (!model.equals(other.model)) {
+			return false;
+		}
+		if (numberOfStrings != other.numberOfStrings) {
+			return false;
+		}
+		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) {
+			return false;
+		}
+		if (serialNumber == null) {
+			if (other.serialNumber != null) {
+				return false;
+			}
+		} else if (!serialNumber.equals(other.serialNumber)) {
+			return false;
+		}
+		if (topWood != other.topWood) {
+			return false;
+		}
+		if (type != other.type) {
+			return false;
+		}
+		return true;
+	}
+	
 }

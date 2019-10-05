@@ -3,15 +3,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="test"/>
-	<classpathentry kind="lib" path="/Users/rphillips/.p2/pool/plugins/org.junit_4.12.0.v201504281640/junit.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://junit.org/junit4/javadoc/latest/"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="/Users/rphillips/.p2/pool/plugins/org.junit.jupiter.api_5.5.1.v20190826-0900.jar">
-		<attributes>
-			<attribute name="javadoc_location" value="http://junit.org/junit5/docs/current/api/"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/5"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

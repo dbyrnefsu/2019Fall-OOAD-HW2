@@ -3,7 +3,7 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2018-09-03
+ * Date: 2019-10-05
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -12,7 +12,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Guitar contains the information needed to keep track of a type of guitar from
  * Rick's music store
  * 
- * @author HeadFirstOODA
+ * @author Priya
  *
  */
 public class Guitar implements GuitarInterface {
@@ -46,28 +46,54 @@ public class Guitar implements GuitarInterface {
 				model,
 				type,
 				backWood,
-				topWood);
-		if (numStrings == null) this.numberOfStrings = 0;
-		else this.numberOfStrings = numStrings;
+				topWood,
+				numStrings);
+		
 	}
-
+	
+	/**
+	 * Returns the name of the manufacturer
+	 * @return
+	 */
 	public Manufacturer getManufacturer() {
 		return gs.getManufacturer();
 	}
+	
+	/**
+	 * Returns the guitar type
+	 * @return
+	 */
 	public Type getType() {
 		return gs.getType();
 	}
+	
+	/**
+	 * Returns the manufacturer model
+	 * @return
+	 */
 	public String getModel() {
 		return gs.getModel();
 	}
+	
+	/**
+	 * Returns the type of wood used in the body
+	 * @return
+	 */
 	public Wood getBackWood() {
 		return gs.getBackWood();
 	}
+	
+	/**
+	 * Returns the type of wood used in the face
+	 * @return
+	 */
 	public Wood getTopWood() {
 		return gs.getTopWood();
 	}
+	
 	/**
 	 * Returns the manufacturer serial number
+	 * @return
 	 */
 	public String getSerialNumber() {
 		return serialNumber;
@@ -75,6 +101,7 @@ public class Guitar implements GuitarInterface {
 
 	/**
 	 * Returns store price of guitar
+	 * @return
 	 */
 	public double getPrice() {
 		return price;
@@ -90,9 +117,10 @@ public class Guitar implements GuitarInterface {
 		
 	/**
 	 * Returns the number of string for this guitar
+	 * @return
 	 */
 	public int getNumberOfStrings() {
-		return numberOfStrings;
+		return gs.getnumStrings();
 	}
 
 	/**
@@ -103,7 +131,7 @@ public class Guitar implements GuitarInterface {
 				gs.getManufacturer(),
 				gs.getModel(),
 				gs.getType(),
-				numberOfStrings, 
+				gs.getnumStrings(), 
 				gs.getTopWood(),
 				gs.getBackWood(),
 				price,
@@ -122,30 +150,37 @@ public class Guitar implements GuitarInterface {
 	private double price;
 	
 	/**
-	 * Guitars number of strings
+	 * Guitars specification for this class
 	 */
-	private int numberOfStrings;
-	
 	private GuitarSpec gs;
 	
-	public boolean equals(Guitar g) {
-		if(!this.gs.equals(g.gs)) { // checking passed specs with current specs
+	/**
+	 * Compares two guitars and return True/false 
+	 * 
+	 * @param guitar object
+	 * @return true if it equals a guitar else false
+	 */
+	public boolean equals(Guitar otherGuitar) {
+		if(!this.gs.equals(otherGuitar.gs)) { // checking passed specifications with current specifications 
 			return false; 
 		}
-		if(this.serialNumber!=g.serialNumber) {
+		if(this.serialNumber!=otherGuitar.serialNumber) {
 			return false;
 		}
-		if(this.price!=g.price) {
-			return false;
-		}
-		if(this.numberOfStrings!=g.numberOfStrings) {
+		if(this.price!=otherGuitar.price) {
 			return false;
 		}
 		return true;
 	}
 	
-	public boolean matches(GuitarSpec gs) {
-		return this.gs.matches(gs);
+	/**
+	 * Checks for the matching guitars and return True/false 
+	 * 
+	 * @param guitar's specifications
+	 * @return true if matching guitars are found else false
+	 */
+	public boolean matches(GuitarSpec otherGs) {
+		return this.gs.matches(otherGs);
 	}
 	
 

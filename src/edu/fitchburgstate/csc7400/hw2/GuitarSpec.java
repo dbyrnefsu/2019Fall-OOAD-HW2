@@ -1,31 +1,64 @@
+/**
+ * Class: Object-Oriented Design and Analysis
+ * Professor: Orlando Montalvo
+ * Assignment: HW 2
+ * 
+ * Date: 2019-10-05
+ */
+
 package edu.fitchburgstate.csc7400.hw2;
 
+/**
+ * GuitarSpec contains the specifications needed to keep track of a type of guitar from
+ * Rick's music store
+ * 
+ * @author Priya
+ *
+ */
 public class GuitarSpec implements GuitarInterface {
 	
+	/**
+	 * Full constructor
+	 * 
+	 * @param manufacturer the guitar's manufacturer
+	 * @param model the manufacturers model
+	 * @param type guitar type (electric/acoustic)
+	 * @param backWood the wood used for the guitar body
+	 * @param topWood the wood used for the guitar's face
+	 */
 	public GuitarSpec(Manufacturer manufacturer,
 			String model,
 			Type type,
 			Wood backWood,
-			Wood topWood
-			) {
+			Wood topWood,
+			Integer numStrings)
+			 {
 		setManufacturer(manufacturer);
 		setModel(model);
 		setType(type);
 		setTopWood(topWood);
 		setBackWood(backWood);
+		setnumStrings(numStrings);
 	}
 	
+	/**
+	 * Sets the manufacturer of the guitar
+	 */
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;
 	}
 	
 	/**
 	 * Returns the name of the manufacturer
+	 * @return 
 	 */
 	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 	
+	/**
+	 * Sets the model of the guitar
+	 */
 	public void setModel(String model) {
 		if(model==null) 
 			this.model="";
@@ -35,11 +68,15 @@ public class GuitarSpec implements GuitarInterface {
 
 	/**
 	 * Returns the manufacturer model
+	 * @return
 	 */
 	public String getModel() {
 		return model;
 	}
-
+	
+	/**
+	 * Sets the type of the guitar
+	 */
 	public void setType(Type type) {
 		this.type = type;
 	}
@@ -52,54 +89,90 @@ public class GuitarSpec implements GuitarInterface {
 		return type;
 	}
 	
+	/**
+	 * Sets the backwoods of the guitar
+	 */
 	public void setBackWood(Wood backWood) {
 		this.backWood = backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
+	 * @return
 	 */
 	public Wood getBackWood() {
 		return backWood;
 	}
 	
+	/**
+	 * Sets the topwood of the guitar
+	 */
 	public void setTopWood(Wood topWood) {
 		this.topWood = topWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
+	 * @return
 	 */
 	public Wood getTopWood() {
 		return topWood;
 	}
 	
-	public boolean equals(GuitarSpec gs) {
-		if(this.manufacturer !=gs.manufacturer)
+	public void setnumStrings(Integer numStrings) {
+		if (numStrings == null) this.numStrings = 0;
+		else this.numStrings = numStrings;
+	}
+	
+	public Integer getnumStrings() {
+		return numStrings;
+	}
+	
+	
+	/**
+	 * Compares two guitars with the specifications and return True/false 
+	 * 
+	 * @param guitarSpec object
+	 * @return true if it equals a guitar else false
+	 */
+	public boolean equals(GuitarSpec otherGs) {
+		if(this.manufacturer !=otherGs.manufacturer)
 			return false;
-		if(this.backWood !=gs.backWood)
+		if(this.backWood !=otherGs.backWood)
 			return false;
-		if(this.topWood !=gs.topWood)
+		if(this.topWood !=otherGs.topWood)
 			return false;
-		if(this.type !=gs.type)
+		if(this.type !=otherGs.type)
 			return false;
-		if(!this.model.equalsIgnoreCase(gs.model))
+		if(this.numStrings != otherGs.numStrings)
+			return false;
+		if(!this.model.equalsIgnoreCase(otherGs.model))
 			return false;
 		return true;
 	}
-	public boolean matches(GuitarSpec gs) {
-		if(gs.manufacturer!= Manufacturer.Any && this.manufacturer !=gs.manufacturer)
+	
+	/**
+	 * Checks for the matching guitars and return True/false 
+	 * 
+	 * @param guitar's specifications
+	 * @return true if matching guitars are found else false
+	 */
+	public boolean matches(GuitarSpec otherGs) {
+		if(otherGs.manufacturer!= Manufacturer.Any && this.manufacturer !=otherGs.manufacturer)
 			return false;
-		if(gs.backWood!=Wood.Any && this.backWood !=gs.backWood)
+		if(otherGs.backWood!=Wood.Any && this.backWood !=otherGs.backWood)
 			return false;
-		if(gs.topWood != Wood.Any && this.topWood !=gs.topWood)
+		if(otherGs.topWood != Wood.Any && this.topWood !=otherGs.topWood)
 			return false;
-		if(gs.type!=Type.Any && this.type !=gs.type)
+		if(otherGs.type!=Type.Any && this.type !=otherGs.type)
 			return false;
-		if(!gs.model.equals("") && !this.model.equalsIgnoreCase(gs.model))
+		if(otherGs.numStrings!=0 && this.numStrings !=otherGs.numStrings)
+			return false;
+		if(!otherGs.model.equals("") && !this.model.equalsIgnoreCase(otherGs.model))
 			return false;
 		return true;
 	}
+	
 	/**
 	 * The name of the manufacturer
 	 */
@@ -124,6 +197,12 @@ public class GuitarSpec implements GuitarInterface {
 	 * The wood used for the face of the guitar
 	 */
 	private Wood topWood;
+	
+	/**
+	 * The num of strings of the guitar
+	 */
+	private Integer numStrings;
+	
 	/**
 	 * Turn object into a readable string
 	 */

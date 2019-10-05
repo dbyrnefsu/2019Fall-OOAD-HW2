@@ -21,7 +21,7 @@ import edu.fitchburgstate.csc7400.hw2.Guitar;;
  */
 class GuitarTest {
 	
-	Guitar testGuitar;
+	Guitar testGuitar; //Member object variable
 
 	/**
 	 * Creates a test class that will be used for testing getters and setters

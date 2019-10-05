@@ -3,7 +3,7 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2017-09-20
+ * Date: 2019-10-05
  */
 package edu.fitchburgstate.csc7400.hw2;
 
@@ -23,7 +23,7 @@ public class Inventory {
 	 * Default constructor
 	 */
 	public Inventory() {
-		guitars = new LinkedList<Guitar>();
+		guitars = new LinkedList<Guitar>(); 
 	}
 
 	/**
@@ -98,12 +98,12 @@ public class Inventory {
 	}
 
 	/**
-	 * Finds and returns a guitar that matches a provided guitar. Any null in
+	 * Finds and returns a guitar list that matches a provided guitarSpec. Any enum in
 	 * spec are consider wildcards.
 	 * 
 	 * @param searchGuitarSpec
 	 *            the guitarSpec we want to match
-	 * @return the found guitar, may be null
+	 * @return the matching list of guitars, may be empty list
 	 */
 	public List<Guitar> search(GuitarSpec searchGuitarSpec) {
 		LinkedList<Guitar> guitarList=new LinkedList<Guitar>();

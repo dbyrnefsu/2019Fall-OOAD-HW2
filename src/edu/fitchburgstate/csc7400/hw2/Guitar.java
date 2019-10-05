@@ -15,7 +15,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar {
+public class Guitar implements GuitarInterface {
 
 	/**
 	 * Full constructor
@@ -31,22 +31,20 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Type type, 
+			Wood backWood,
+			Wood topWood,
 			Integer numStrings) {
+		  
 		this.serialNumber = serialNumber;
 		this.price = price;
-		this.manufacturer = manufacturer;
-		this.model = model;
-		this.type = type;
-		this.backWood = backWood;
-		this.topWood = topWood;
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
+		this.guitarSpec = new GuitarSpec(manufacturer,model,type,backwood,topwood,price);
 	}
+	
 
 	/**
 	 * Returns the manufacturer serial number
@@ -72,7 +70,7 @@ public class Guitar {
 	/**
 	 * Returns the name of the manufacturer
 	 */
-	public String getManufacturer() {
+	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
@@ -87,21 +85,21 @@ public class Guitar {
 	 * Returns the guitar type
 	 * @return
 	 */
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public String getBackWood() {
+	public Wood getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public String getTopWood() {
+	public Wood getTopWood() {
 		return topWood;
 	}
 	
@@ -127,7 +125,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private Manufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,17 +135,17 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private Type type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private Wood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private Wood topWood;
 
 	/**
 	 * Rick's price for the guitar
@@ -158,9 +156,14 @@ public class Guitar {
 	 * Guitars number of strings
 	 */
 	private int numberOfStrings;
+	/**
+	 * Guitar specification forthe class
+	 */
+	private GuitarSpec guitarSpec;
 
 	/**
 	 * Formatting string for toString()
 	 */
 	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
-}
+
+	}

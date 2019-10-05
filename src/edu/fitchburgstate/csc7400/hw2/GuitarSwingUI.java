@@ -294,18 +294,18 @@ public class GuitarSwingUI {
 				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, model, priceLow,priceHigh,topWood, backWood);
+				List<Guitar> matching = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
-				if (matching == null) {
+				if (matching == null || matching.size() == 0) {
 					setNotFound();
 				}
 				else {
-					setFound(1);
+					setFound(matching.size);
 					matchingGuitars.addElement(matching.toString());
 				}
 			}
@@ -367,7 +367,7 @@ public class GuitarSwingUI {
 	}
 	
 	/**
-	 * Indicate that guitars wer found
+	 * Indicate that guitars was found
 	 */
 	private void setFound(int numFound) {
 		if (greetingField != null) greetingField.setText(String.format(FOUND, getName(), numFound));

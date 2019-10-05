@@ -15,7 +15,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar {
+public class Guitar implements GuitarInterface {
 
 	/**
 	 * Full constructor
@@ -31,11 +31,11 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			GuitarManufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			GuitarType type, 
+			GuitarWood backWood,
+			GuitarWood topWood,
 			Integer numStrings) {
 		this.serialNumber = serialNumber;
 		this.price = price;
@@ -72,7 +72,7 @@ public class Guitar {
 	/**
 	 * Returns the name of the manufacturer
 	 */
-	public String getManufacturer() {
+	public GuitarManufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
@@ -87,21 +87,21 @@ public class Guitar {
 	 * Returns the guitar type
 	 * @return
 	 */
-	public String getType() {
+	public GuitarType getType() {
 		return type;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public String getBackWood() {
+	public GuitarWood getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public String getTopWood() {
+	public GuitarWood getTopWood() {
 		return topWood;
 	}
 	
@@ -127,7 +127,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private GuitarManufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,17 +137,17 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private GuitarType type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private GuitarWood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private GuitarWood topWood;
 
 	/**
 	 * Rick's price for the guitar

@@ -7,6 +7,10 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
+import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarManufacturer;
+import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarType;
+import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarWood;
+
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +69,8 @@ public class Inventory {
 	 * @precondition backWood != null
 	 * @precondition numStrings >= 6 or null
 	 */
-	public void addGuitar(String serialNumber, double price, String manufacturer, String type, String model,
-			String topWood, String backWood, Integer numStrings) {
+	public void addGuitar(String serialNumber, double price, GuitarManufacturer manufacturer, GuitarType type, String model,
+			GuitarWood topWood, GuitarWood backWood, Integer numStrings) {
 		assert serialNumber != null;
 		assert price > 0;
 		assert manufacturer != null;
@@ -76,7 +80,7 @@ public class Inventory {
 		assert backWood != null;
 		assert numStrings >= 0;
 		
-		Guitar guitar = new Guitar(serialNumber, price, manufacturer, type, model, topWood, backWood, numStrings);
+		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model, type, topWood, backWood, numStrings);
 		this.addGuitar(guitar);
 	}
 
@@ -106,11 +110,11 @@ public class Inventory {
 	 * @return the found guitar, may be null
 	 */
 	public Guitar search(Guitar searchGuitar) {
-		String manufacturer = searchGuitar.getManufacturer();
+		GuitarManufacturer manufacturer = searchGuitar.getManufacturer();
 		String model = searchGuitar.getModel();
-		String type = searchGuitar.getType();
-		String backWood = searchGuitar.getBackWood();
-		String topWood = searchGuitar.getTopWood();
+		GuitarType type = searchGuitar.getType();
+		GuitarWood backWood = searchGuitar.getBackWood();
+		GuitarWood topWood = searchGuitar.getTopWood();
 		int numString = searchGuitar.getNumberOfStrings();
 
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
@@ -118,15 +122,15 @@ public class Inventory {
 			// Ignore serial number since that's unique
 			// Ignore price since that's unique
 			if ((manufacturer != null) && (!manufacturer.equals(""))
-					&& (!manufacturer.equalsIgnoreCase(guitar.getManufacturer())))
+					&& (!manufacturer.equals(guitar.getManufacturer())))
 				continue;
 			if ((model != null) && (!model.equals("")) && (!model.equalsIgnoreCase(guitar.getModel())))
 				continue;
-			if ((type != null) && (!type.equals("")) && (!type.equalsIgnoreCase(guitar.getType())))
+			if ((type != null) && (!type.equals("")) && (!type.equals((guitar.getType()))))
 				continue;
-			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equalsIgnoreCase(guitar.getBackWood())))
+			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equals(guitar.getBackWood())))
 				continue;
-			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equalsIgnoreCase(guitar.getTopWood())))
+			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equals(guitar.getTopWood())))
 				continue;
 			if (numString != 0 && numString != guitar.getNumberOfStrings())
 				continue;

@@ -130,6 +130,46 @@ public class Guitar implements GuitarInterface {
 	private GuitarManufacturer manufacturer;
 
 	/**
+	 * Setter for manufacturer
+	 * @param manufacturer
+	 */
+	public void setManufacturer(GuitarManufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	/**
+	 * Setter for model
+	 * @param model
+	 */
+	public void setModel(String model) {
+		this.model = model;
+	}
+
+	/**
+	 * Setter for type
+	 * @param type
+	 */
+	public void setType(GuitarType type) {
+		this.type = type;
+	}
+
+	/**
+	 * Setter for backwood
+	 * @param backWood
+	 */
+	public void setBackWood(GuitarWood backWood) {
+		this.backWood = backWood;
+	}
+
+	/**
+	 * Setter for topwood
+	 * @param topWood
+	 */
+	public void setTopWood(GuitarWood topWood) {
+		this.topWood = topWood;
+	}
+
+	/**
 	 * The manufacturer model number
 	 */
 	private String model;

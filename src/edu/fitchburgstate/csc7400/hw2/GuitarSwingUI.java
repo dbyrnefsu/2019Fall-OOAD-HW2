@@ -37,6 +37,8 @@ import javax.swing.event.ChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.beans.PropertyChangeEvent;
@@ -294,20 +296,38 @@ public class GuitarSwingUI {
 				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
 				
 				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, backWood, topWood, model);
 				List<Guitar> matching = inventory.search(searchGuitarSpec);
-
 				matchingGuitars.clear();
-				if (matching == null) {
+				if(matching == null) {
 					setNotFound();
+				}else {
+					// get another matching list of Guitar when using price
+					List<Guitar> matchingWithPrice = new LinkedList<Guitar>();
+					for(Iterator<Guitar> it = matching.iterator(); it.hasNext();) {
+						Guitar g = it.next();
+						double price = g.getPrice();
+						if(price >= priceLow && price <= priceHigh) {
+							matchingWithPrice.add(g);
+						}
+					}
+								
+					if (matchingWithPrice.size() == 0) {
+						setNotFound();
+					}
+					else {
+						setFound(matchingWithPrice.size());
+						for(Iterator<Guitar> it = matchingWithPrice.iterator(); it.hasNext();) {
+								matchingGuitars.addElement(it.next().toString());
+							
+						}			
+					}
+
 				}
-				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
-				}
+				
 			}
 		});
 		questionPane.add(btnSearch); //$NON-NLS-1$
@@ -367,7 +387,7 @@ public class GuitarSwingUI {
 	}
 	
 	/**
-	 * Indicate that guitars wer found
+	 * Indicate that guitars were found
 	 */
 	private void setFound(int numFound) {
 		if (greetingField != null) greetingField.setText(String.format(FOUND, getName(), numFound));

@@ -37,6 +37,7 @@ import javax.swing.event.ChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 import java.beans.PropertyChangeEvent;
@@ -305,8 +306,11 @@ public class GuitarSwingUI {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					setFound(matching.size());
+					for(Iterator<Guitar> it = matching.iterator(); it.hasNext();) {
+						matchingGuitars.addElement(it.next().toString());
+					}
+					
 				}
 			}
 		});
@@ -367,7 +371,7 @@ public class GuitarSwingUI {
 	}
 	
 	/**
-	 * Indicate that guitars wer found
+	 * Indicate that guitars were found
 	 */
 	private void setFound(int numFound) {
 		if (greetingField != null) greetingField.setText(String.format(FOUND, getName(), numFound));

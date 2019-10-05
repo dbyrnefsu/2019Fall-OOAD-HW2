@@ -171,7 +171,7 @@ public class GuitarSwingUI {
 		JLabel lblManufacturer = new JLabel(Messages.getString("GuitarRun.BuilderLabel")); //$NON-NLS-1$
 		questionPane.add(lblManufacturer); //$NON-NLS-1$
 		
-		manufacturerComboBox = new JComboBox<String>();
+		manufacturerComboBox = new JComboBox<Manufacturer>();
 		manufacturerComboBox.setToolTipText(Messages.getString("GuitarRun.BuilderTip")); //$NON-NLS-1$
 		manufacturerComboBox.setModel(new DefaultComboBoxModel<String>(manufacturers));
 		manufacturerComboBox.addItemListener(new ItemListener() {
@@ -288,16 +288,16 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
-				String type = getChosen((String) typeComboBox.getSelectedItem());
-				String topWood = getChosen((String) topWoodComboBox.getSelectedItem());
+				Manufacturer manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
+				Type type = getChosen((String) typeComboBox.getSelectedItem());
+				Wood topWood = getChosen((String) topWoodComboBox.getSelectedItem());
 				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
 				//double priceLow = (double) lowSpinner.getValue();
 				//double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
+				Guitar searchGuitar = new Guitar(null, 0, manufacturer, model, type, backWood, topWood, 0);
 				Guitar matching = inventory.search(searchGuitar);
 
 				matchingGuitars.clear();
@@ -438,10 +438,10 @@ public class GuitarSwingUI {
 	private JTextField txtEnterModel;
 	private JTextField greetingField;
 	
-	private JComboBox<String> manufacturerComboBox;
-	private JComboBox<String> typeComboBox;
-	private JComboBox<String> topWoodComboBox;
-	private JComboBox<String> backWoodComboBox;
+	private JComboBox<Manufacturer> manufacturerComboBox;
+	private JComboBox<Type> typeComboBox;
+	private JComboBox<Wood> topWoodComboBox;
+	private JComboBox<Wood> backWoodComboBox;
 	
 	private JSpinner lowSpinner;
 	private JSpinner highSpinner;

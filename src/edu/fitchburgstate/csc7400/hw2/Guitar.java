@@ -15,7 +15,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar {
+public class Guitar implements GuitarInterface {
 
 	/**
 	 * Full constructor
@@ -31,23 +31,41 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Type type, 
+			Wood backWood,
+			Wood topWood,			
 			Integer numStrings) {
-		this.serialNumber = serialNumber;
+		if(serialNumber==null) 
+			this.serialNumber="";
+		else
+			this.serialNumber = serialNumber;
 		this.price = price;
-		this.manufacturer = manufacturer;
-		this.model = model;
-		this.type = type;
-		this.backWood = backWood;
-		this.topWood = topWood;
+		gs = new GuitarSpec(manufacturer,
+				model,
+				type,
+				backWood,
+				topWood);
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
 	}
 
+	public Manufacturer getManufacturer() {
+		return gs.getManufacturer();
+	}
+	public Type getType() {
+		return gs.getType();
+	}
+	public String getModel() {
+		return gs.getModel();
+	}
+	public Wood getBackWood() {
+		return gs.getBackWood();
+	}
+	public Wood getTopWood() {
+		return gs.getTopWood();
+	}
 	/**
 	 * Returns the manufacturer serial number
 	 */
@@ -69,42 +87,7 @@ public class Guitar {
 		this.price = newPrice;
 	}
 
-	/**
-	 * Returns the name of the manufacturer
-	 */
-	public String getManufacturer() {
-		return this.manufacturer;
-	}
-
-	/**
-	 * Returns the manufacturer model
-	 */
-	public String getModel() {
-		return model;
-	}
-
-	/**
-	 * Returns the guitar type
-	 * @return
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * Returns the type of wood used in the body
-	 */
-	public String getBackWood() {
-		return backWood;
-	}
-
-	/**
-	 * Returns the type of wood used in the face
-	 */
-	public String getTopWood() {
-		return topWood;
-	}
-	
+		
 	/**
 	 * Returns the number of string for this guitar
 	 */
@@ -116,7 +99,15 @@ public class Guitar {
 	 * Turn object into a readable string
 	 */
 	public String toString() {
-		return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
+		return String.format(toStringFormat,
+				gs.getManufacturer(),
+				gs.getModel(),
+				gs.getType(),
+				numberOfStrings, 
+				gs.getTopWood(),
+				gs.getBackWood(),
+				price,
+				serialNumber);
 	}
 
 	/**
@@ -124,31 +115,7 @@ public class Guitar {
 	 */
 	private String serialNumber;
 
-	/**
-	 * The name of the manufacturer
-	 */
-	private String manufacturer;
-
-	/**
-	 * The manufacturer model number
-	 */
-	private String model;
-
-	/**
-	 * The guitar type (electric/acoustic)
-	 */
-	private String type;
-
-	/**
-	 * The wood used for the back of the guitar
-	 */
-	private String backWood;
-
-	/**
-	 * The wood used for the face of the guitar
-	 */
-	private String topWood;
-
+	
 	/**
 	 * Rick's price for the guitar
 	 */
@@ -158,9 +125,34 @@ public class Guitar {
 	 * Guitars number of strings
 	 */
 	private int numberOfStrings;
+	
+	private GuitarSpec gs;
+	
+	public boolean equals(Guitar g) {
+		if(!this.gs.equals(g.gs)) { // checking passed specs with current specs
+			return false; 
+		}
+		if(this.serialNumber!=g.serialNumber) {
+			return false;
+		}
+		if(this.price!=g.price) {
+			return false;
+		}
+		if(this.numberOfStrings!=g.numberOfStrings) {
+			return false;
+		}
+		return true;
+	}
+	
+	public boolean matches(GuitarSpec gs) {
+		return this.gs.matches(gs);
+	}
+	
 
 	/**
 	 * Formatting string for toString()
 	 */
 	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
+	
+	
 }

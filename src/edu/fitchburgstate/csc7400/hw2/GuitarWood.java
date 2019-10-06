@@ -8,7 +8,7 @@ public enum GuitarWood {
 	BRAZILIANROSEWOOD("Brazilian Rosewood"),
 	CEDAR("Cedar"),
 	COCOBOLO("Cocobolo"),
-	INDIANROSEWOOD("Indian_Rosewood"),
+	INDIANROSEWOOD("Indian Rosewood"),
 	MAHOGANY("Mahogany"),
 	MAPLE("Maple"),
 	SITKA("Sitka");

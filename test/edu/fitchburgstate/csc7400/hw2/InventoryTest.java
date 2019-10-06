@@ -34,8 +34,24 @@ public class InventoryTest {
 	public void setUp() throws Exception {
 		this.guitarInventory = new Inventory();
 		Inventory inventory = this.guitarInventory;
-		inventory.addGuitar("11277", 3999.95, "COLLINGS", "ACOUSTIC", "CJ", "INDIAN_ROSEWOOD", "SITKA", 6);
-		inventory.addGuitar("V95693", 1499.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
+		//inventory.addGuitar("11277", 3999.95, "COLLINGS", "ACOUSTIC", "CJ", "INDIAN_ROSEWOOD", "SITKA", 6);
+		inventory.addGuitar("11277", 3999.95, 
+			new GuitarSpec(
+					GuitarManufacturer.COLLINS, 
+					GuitarType.ACOUSTIC, 
+					GuitarWood.INDIANROSEWOOD, 
+					GuitarWood.SITKA, "CJ"), 
+			6);
+		
+		//inventory.addGuitar("V95693", 1499.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
+		inventory.addGuitar("V95693", 1499.95,
+			new GuitarSpec(
+					GuitarManufacturer.FENDER, 
+					GuitarType.ELECTRIC, 
+					GuitarWood.ALDER, 
+					GuitarWood.ALDER, "Stratocastor"), 
+			6);
+		
 		inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
 		inventory.addGuitar("122784", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ADIRONDACK", 6);
 		inventory.addGuitar("76531", 6295.95, "MARTIN", "ACOUSTIC", "OM-28", "BRAZILIAN_ROSEWOOD",

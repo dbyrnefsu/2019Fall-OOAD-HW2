@@ -20,7 +20,7 @@ public enum GuitarType {
 	
 	public static GuitarType getValueFromName(String name) {
 		for (GuitarType g : GuitarType.values()) {
-			if (g.displayName() == name) { return g; }
+			if (g.displayName().equals(name)) { return g; }
 		}
 		return null;
 	}

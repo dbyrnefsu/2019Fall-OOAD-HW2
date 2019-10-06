@@ -26,7 +26,7 @@ public enum GuitarManufacturer {
 	
 	public static GuitarManufacturer getValueFromName(String name) {
 		for (GuitarManufacturer g : GuitarManufacturer.values()) {
-			if (g.displayName() == name) { return g; }
+			if (g.displayName().equals(name)) { return g; }
 		}
 		return null;
 	}

@@ -27,7 +27,7 @@ public enum GuitarWood {
 	
 	public static GuitarWood getValueFromName(String name) {
 		for (GuitarWood g : GuitarWood.values()) {
-			if (g.displayName() == name) { return g; }
+			if (g.displayName().equals(name)) { return g; }
 		}
 		return null;
 	}

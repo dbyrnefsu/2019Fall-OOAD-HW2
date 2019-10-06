@@ -39,9 +39,9 @@ public class InventoryTest {
 		inventory.addGuitar("11277", 3999.95, 
 			new GuitarSpec(
 					GuitarManufacturer.COLLINS, 
-					GuitarType.ACOUSTIC,  
-					GuitarWood.SITKA,
-					GuitarWood.INDIANROSEWOOD,"CJ"), 
+					GuitarType.ACOUSTIC, 
+					GuitarWood.INDIANROSEWOOD, 
+					GuitarWood.SITKA, "CJ"), 
 			6);
 		
 		//inventory.addGuitar("V95693", 1499.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
@@ -53,16 +53,8 @@ public class InventoryTest {
 					GuitarWood.ALDER, "Stratocastor"), 
 			6);
 		
-		//inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
-		inventory.addGuitar("V95693", 1549.95,
-				new GuitarSpec(
-						GuitarManufacturer.FENDER, 
-						GuitarType.ELECTRIC, 
-						GuitarWood.ALDER, 
-						GuitarWood.ALDER, "Stratocastor"), 
-				6);
+		//@TODO Convert the rest of these
 		
-<<<<<<< HEAD
 		//inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
 		inventory.addGuitar("V9512", 1549.95,
 				new GuitarSpec(
@@ -72,14 +64,11 @@ public class InventoryTest {
 						GuitarWood.ALDER, "Stratocastor"), 
 				6);
 		
-=======
->>>>>>> aaea62975542380c7251168a555f55c3b62f11b6
 		//inventory.addGuitar("122784", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ADIRONDACK", 6);
 		inventory.addGuitar("122784", 5495.95,
 				new GuitarSpec(
 						GuitarManufacturer.MARTIN, 
 						GuitarType.ACOUSTIC, 
-<<<<<<< HEAD
 						GuitarWood.MAHOGANY, 
 						GuitarWood.ADIRONDACK, "D-18"), 
 				6);
@@ -93,19 +82,6 @@ public class InventoryTest {
 						GuitarWood.ADIRONDACK, "D-18"), 
 				6);
 		
-=======
-						GuitarWood.ADIRONDACK, 
-						GuitarWood.MAHOGANY, "D-18"), 
-				6);
-		//inventory.addGuitar("76531", 6295.95, "MARTIN", "ACOUSTIC", "OM-28", "BRAZILIAN_ROSEWOOD","ADIRONDACK", 6);
-		inventory.addGuitar("76531", 6295.95,
-				new GuitarSpec(
-						GuitarManufacturer.MARTIN, 
-						GuitarType.ACOUSTIC, 
-						GuitarWood.ADIRONDACK, 
-						GuitarWood.BRAZILIANROSEWOOD, "OM-28"), 
-				6);
->>>>>>> aaea62975542380c7251168a555f55c3b62f11b6
 		//inventory.addGuitar("70108276", 2295.95, "GIBSON", "ELECTRIC", "Les Paul", "MAHOGANY","MAHOGANY", 6);
 		inventory.addGuitar("70108276", 2295.95,
 				new GuitarSpec(
@@ -114,10 +90,7 @@ public class InventoryTest {
 						GuitarWood.MAHOGANY, 
 						GuitarWood.MAHOGANY, "Les Paul"), 
 				6);
-<<<<<<< HEAD
 		
-=======
->>>>>>> aaea62975542380c7251168a555f55c3b62f11b6
 		//inventory.addGuitar("82765501", 1890.95, "GIBSON", "ELECTRIC", "SG '61 Reissue", "MAHOGANY","MAHOGANY", 6);
 		inventory.addGuitar("82765501", 1890.95,
 				new GuitarSpec(
@@ -126,16 +99,12 @@ public class InventoryTest {
 						GuitarWood.MAHOGANY, 
 						GuitarWood.MAHOGANY, "SG '61 Reissue"), 
 				6);
-<<<<<<< HEAD
 		
-=======
->>>>>>> aaea62975542380c7251168a555f55c3b62f11b6
 		//inventory.addGuitar("77023", 6275.95, "MARTIN", "ACOUSTIC", "D-28", "BRAZILIAN_ROSEWOOD","ADIRONDACK", 6);
 		inventory.addGuitar("77023", 6275.95,
 				new GuitarSpec(
 						GuitarManufacturer.MARTIN, 
 						GuitarType.ACOUSTIC, 
-<<<<<<< HEAD
 						GuitarWood.BRAZILIANROSEWOOD, 
 						GuitarWood.ADIRONDACK, "D-28"), 
 				6);
@@ -144,43 +113,6 @@ public class InventoryTest {
 		inventory.addGuitar("566-62", 8999.95, "RYAN", "ACOUSTIC", "Cathedral", "COCOBOLO", "CEDAR", 6);
 		inventory.addGuitar("6 29584", 2100.95, "PRS", "ELECTRIC", "Dave Navarro Signature", "MAHOGANY","MAPLE", 6);
 		inventory.addGuitar("GPC12PA4", 1595.95, "MARTIN", "ACOUSTIC", "GPC12PA4", "MAPLE", "SITKA", 12);
-=======
-						GuitarWood.ADIRONDACK, 
-						GuitarWood.BRAZILIANROSEWOOD, "D-28"), 
-				6);
-		//inventory.addGuitar("1092", 12995.95, "OLSON", "ACOUSTIC", "SJ", "INDIAN_ROSEWOOD", "CEDAR", 6);
-		inventory.addGuitar("1092", 12995.95,
-				new GuitarSpec(
-						GuitarManufacturer.OLSON, 
-						GuitarType.ACOUSTIC, 
-						GuitarWood.CEDAR, 
-						GuitarWood.INDIANROSEWOOD, "SJ"), 
-				6);
-		//inventory.addGuitar("566-62", 8999.95, "RYAN", "ACOUSTIC", "Cathedral", "COCOBOLO", "CEDAR", 6);
-		inventory.addGuitar("566-62", 8999.95,
-				new GuitarSpec(
-						GuitarManufacturer.RYAN, 
-						GuitarType.ACOUSTIC, 
-						GuitarWood.CEDAR, 
-						GuitarWood.COCOBOLO, "Cathedral"), 
-				6);
-		//inventory.addGuitar("6 29584", 2100.95, "PRS", "ELECTRIC", "Dave Navarro Signature", "MAHOGANY","MAPLE", 6);
-		inventory.addGuitar("6 29584", 2100.95,
-				new GuitarSpec(
-						GuitarManufacturer.PRS, 
-						GuitarType.ELECTRIC, 
-						GuitarWood.MAPLE, 
-						GuitarWood.MAHOGANY, "Dave Navarro Signature"), 
-				6);
-		//inventory.addGuitar("GPC12PA4", 1595.95, "MARTIN", "ACOUSTIC", "GPC12PA4", "MAPLE", "SITKA", 12);
-		inventory.addGuitar("GPC12PA4", 1595.95,
-				new GuitarSpec(
-						GuitarManufacturer.MARTIN, 
-						GuitarType.ACOUSTIC, 
-						GuitarWood.SITKA, 
-						GuitarWood.MAPLE, "GPC12PA4"), 
-				6);
->>>>>>> aaea62975542380c7251168a555f55c3b62f11b6
 	}
 
 	/**
@@ -267,7 +199,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_numstrings() {
-		Guitar searchGuitar = new Guitar(null, 0, null, 12);
+		Guitar searchGuitar = new Guitar(null, 0, null, null, null, null, null, 12);
 		String[] serialNumbers = { "GPC12PA4" };
 		this.searchTester(searchGuitar, serialNumbers);
 }

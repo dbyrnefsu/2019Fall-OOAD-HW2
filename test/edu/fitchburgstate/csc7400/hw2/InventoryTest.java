@@ -34,6 +34,7 @@ public class InventoryTest {
 	public void setUp() throws Exception {
 		this.guitarInventory = new Inventory();
 		Inventory inventory = this.guitarInventory;
+		
 		//inventory.addGuitar("11277", 3999.95, "COLLINGS", "ACOUSTIC", "CJ", "INDIAN_ROSEWOOD", "SITKA", 6);
 		inventory.addGuitar("11277", 3999.95, 
 			new GuitarSpec(
@@ -54,20 +55,63 @@ public class InventoryTest {
 		
 		//@TODO Convert the rest of these
 		
-		inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
-		inventory.addGuitar("122784", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ADIRONDACK", 6);
-		inventory.addGuitar("76531", 6295.95, "MARTIN", "ACOUSTIC", "OM-28", "BRAZILIAN_ROSEWOOD",
-				"ADIRONDACK", 6);
-		inventory.addGuitar("70108276", 2295.95, "GIBSON", "ELECTRIC", "Les Paul", "MAHOGANY",
-				"MAHOGANY", 6);
-		inventory.addGuitar("82765501", 1890.95, "GIBSON", "ELECTRIC", "SG '61 Reissue", "MAHOGANY",
-				"MAHOGANY", 6);
-		inventory.addGuitar("77023", 6275.95, "MARTIN", "ACOUSTIC", "D-28", "BRAZILIAN_ROSEWOOD",
-				"ADIRONDACK", 6);
+		//inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
+		inventory.addGuitar("V9512", 1549.95,
+				new GuitarSpec(
+						GuitarManufacturer.FENDER, 
+						GuitarType.ELECTRIC, 
+						GuitarWood.ALDER, 
+						GuitarWood.ALDER, "Stratocastor"), 
+				6);
+		
+		//inventory.addGuitar("122784", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ADIRONDACK", 6);
+		inventory.addGuitar("122784", 5495.95,
+				new GuitarSpec(
+						GuitarManufacturer.MARTIN, 
+						GuitarType.ACOUSTIC, 
+						GuitarWood.MAHOGANY, 
+						GuitarWood.ADIRONDACK, "D-18"), 
+				6);
+		
+		//inventory.addGuitar("76531", 6295.95, "MARTIN", "ACOUSTIC", "OM-28", "BRAZILIAN_ROSEWOOD", "ADIRONDACK", 6);
+		inventory.addGuitar("122784", 5495.95,
+				new GuitarSpec(
+						GuitarManufacturer.MARTIN, 
+						GuitarType.ACOUSTIC, 
+						GuitarWood.MAHOGANY, 
+						GuitarWood.ADIRONDACK, "D-18"), 
+				6);
+		
+		//inventory.addGuitar("70108276", 2295.95, "GIBSON", "ELECTRIC", "Les Paul", "MAHOGANY","MAHOGANY", 6);
+		inventory.addGuitar("70108276", 2295.95,
+				new GuitarSpec(
+						GuitarManufacturer.GIBSON, 
+						GuitarType.ELECTRIC, 
+						GuitarWood.MAHOGANY, 
+						GuitarWood.MAHOGANY, "Les Paul"), 
+				6);
+		
+		//inventory.addGuitar("82765501", 1890.95, "GIBSON", "ELECTRIC", "SG '61 Reissue", "MAHOGANY","MAHOGANY", 6);
+		inventory.addGuitar("82765501", 1890.95,
+				new GuitarSpec(
+						GuitarManufacturer.GIBSON, 
+						GuitarType.ELECTRIC, 
+						GuitarWood.MAHOGANY, 
+						GuitarWood.MAHOGANY, "SG '61 Reissue"), 
+				6);
+		
+		//inventory.addGuitar("77023", 6275.95, "MARTIN", "ACOUSTIC", "D-28", "BRAZILIAN_ROSEWOOD","ADIRONDACK", 6);
+		inventory.addGuitar("77023", 6275.95,
+				new GuitarSpec(
+						GuitarManufacturer.MARTIN, 
+						GuitarType.ACOUSTIC, 
+						GuitarWood.BRAZILIANROSEWOOD, 
+						GuitarWood.ADIRONDACK, "D-28"), 
+				6);
+		
 		inventory.addGuitar("1092", 12995.95, "OLSON", "ACOUSTIC", "SJ", "INDIAN_ROSEWOOD", "CEDAR", 6);
 		inventory.addGuitar("566-62", 8999.95, "RYAN", "ACOUSTIC", "Cathedral", "COCOBOLO", "CEDAR", 6);
-		inventory.addGuitar("6 29584", 2100.95, "PRS", "ELECTRIC", "Dave Navarro Signature", "MAHOGANY",
-				"MAPLE", 6);
+		inventory.addGuitar("6 29584", 2100.95, "PRS", "ELECTRIC", "Dave Navarro Signature", "MAHOGANY","MAPLE", 6);
 		inventory.addGuitar("GPC12PA4", 1595.95, "MARTIN", "ACOUSTIC", "GPC12PA4", "MAPLE", "SITKA", 12);
 	}
 
@@ -204,20 +248,20 @@ public class InventoryTest {
 	 * @return true if g1 and g2 are equal
 	 */
 	private boolean guitarEquals(Guitar g1, Guitar g2) {
-		String manufacturer = g1.getManufacturer();
-		if ((!manufacturer.equalsIgnoreCase(g2.getManufacturer())))
+		String manufacturer = g1.getManufacturer().toString();
+		if ((!manufacturer.equalsIgnoreCase(g2.getManufacturer().toString())))
 			return false;
 		String model = g1.getModel();
 		if (!model.equalsIgnoreCase(g2.getModel()))
 			return false;
-		String type = g1.getType();
-		if (!type.equalsIgnoreCase(g2.getType()))
+		String type = g1.getType().toString();
+		if (!type.equalsIgnoreCase(g2.getType().toString()))
 			return false;
-		String backWood = g1.getBackWood();
-		if (!backWood.equalsIgnoreCase(g2.getBackWood()))
+		String backWood = g1.getBackWood().toString();
+		if (!backWood.equalsIgnoreCase(g2.getBackWood().toString()))
 			return false;
-		String topWood = g1.getTopWood();
-		if (!topWood.equalsIgnoreCase(g2.getTopWood()))
+		String topWood = g1.getTopWood().toString();
+		if (!topWood.equalsIgnoreCase(g2.getTopWood().toString()))
 			return false;
 		return true;
 	}

@@ -18,7 +18,7 @@ public class GuitarSpec implements GuitarInterface {
 			GuitarManufacturer manufacturer, 
 			GuitarType type, 
 			GuitarWood topWood, 
-			GuitarWood backWood, 
+			GuitarWood backWood,
 			String model) {
 		this.manufacturer = manufacturer;
 		this.type = type;

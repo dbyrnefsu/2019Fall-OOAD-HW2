@@ -6,9 +6,7 @@
  * Date: 2017-09-20
  */
 package edu.fitchburgstate.csc7400.hw2;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarManufacturer;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarType;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarWood;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -31,14 +29,18 @@ class GuitarTest {
 	 */
 	@BeforeEach
 	void setUp() {
+		
+		GuitarSpec spec = new GuitarSpec(
+				GuitarManufacturer.GIBSON, 
+				GuitarType.ELECTRIC, 
+				GuitarWood.ADIRONDACK, 
+				GuitarWood.MAPLE, 
+				"EasyLearn");
+		
 		this.testGuitar = new Guitar(
 				"AB123", // serial number
 				203.35, // store price
-				GuitarManufacturer.GIBSON, // Manufacturer
-				"EasyLearn", // Manufacturer model
-				GuitarType.ELECTRIC, // Type of Guitar
-				GuitarWood.MAPLE, // Back wood
-				GuitarWood.ADIRONDACK, // Face wood
+				spec, // Face wood
 				6 // number of strings
 				);
 	}

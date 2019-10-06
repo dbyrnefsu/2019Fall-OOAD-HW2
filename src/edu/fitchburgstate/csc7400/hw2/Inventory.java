@@ -7,10 +7,6 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarManufacturer;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarType;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarWood;
-
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -23,6 +19,7 @@ import java.util.List;
  * @version 2.0
  */
 public class Inventory {
+	
 	/**
 	 * Default constructor
 	 */
@@ -69,18 +66,17 @@ public class Inventory {
 	 * @precondition backWood != null
 	 * @precondition numStrings >= 6 or null
 	 */
-	public void addGuitar(String serialNumber, double price, GuitarManufacturer manufacturer, GuitarType type, String model,
-			GuitarWood topWood, GuitarWood backWood, Integer numStrings) {
+	public void addGuitar(String serialNumber, double price, GuitarSpec spec, Integer numStrings) {
 		assert serialNumber != null;
 		assert price > 0;
-		assert manufacturer != null;
-		assert type != null;
-		assert model != null;
-		assert topWood != null;
-		assert backWood != null;
+		assert spec.getManufacturer() != null;
+		assert spec.getType() != null;
+		assert spec.getModel() != null;
+		assert spec.getTopWood() != null;
+		assert spec.getBackWood() != null;
 		assert numStrings >= 0;
 		
-		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model, type, topWood, backWood, numStrings);
+		Guitar guitar = new Guitar(serialNumber, price, spec, numStrings);
 		this.addGuitar(guitar);
 	}
 

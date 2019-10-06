@@ -8,10 +8,6 @@
 
 package edu.fitchburgstate.csc7400.hw2;
 
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarManufacturer;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarWood;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarType;
-
 import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.GridLayout;
@@ -297,11 +293,12 @@ public class GuitarSwingUI {
 				GuitarWood topWood = GuitarWood.valueOf(getChosen((String) topWoodComboBox.getSelectedItem()));
 				GuitarWood backWood = GuitarWood.valueOf(getChosen((String) backWoodComboBox.getSelectedItem()));
 				String model = txtEnterModel.getText();
+				GuitarSpec spec = new GuitarSpec(manufacturer, type, topWood, backWood, model);
 				if (model != null && model.isEmpty()) model = null;
 				//double priceLow = (double) lowSpinner.getValue();
 				//double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, model, type, topWood, backWood, 0);
+				Guitar searchGuitar = new Guitar(null, 0, spec, 0);
 				Guitar matching = inventory.search(searchGuitar);
 
 				matchingGuitars.clear();

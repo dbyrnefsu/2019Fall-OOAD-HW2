@@ -8,10 +8,6 @@
 
 package edu.fitchburgstate.csc7400.hw2;
 
-import edu.fitchburgstate.csc7400.hw2.GuitarSpec.GuitarManufacturer;
-import edu.fitchburgstate.csc7400.hw2.GuitarSpec.GuitarType;
-import edu.fitchburgstate.csc7400.hw2.GuitarSpec.GuitarWood;
-
 /**
  * Guitar contains the information needed to keep track of a type of guitar from
  * Rick's music store

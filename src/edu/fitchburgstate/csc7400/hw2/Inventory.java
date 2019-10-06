@@ -7,6 +7,7 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -133,6 +134,45 @@ public class Inventory {
 			return guitar;
 		}
 		return null;
+	}
+	
+	/**
+	 * Finds and returns all matching guitars that matches a provided guitar. Any null in
+	 * spec are consider wildcards.
+	 * 
+	 * @param searchGuitar
+	 *            the guitar with qualities we want to match
+	 * @return the found guitar, may be null
+	 */
+	public List<Guitar> searchAll(Guitar searchGuitar) {
+		GuitarManufacturer manufacturer = searchGuitar.getManufacturer();
+		String model = searchGuitar.getModel();
+		GuitarType type = searchGuitar.getType();
+		GuitarWood backWood = searchGuitar.getBackWood();
+		GuitarWood topWood = searchGuitar.getTopWood();
+		int numString = searchGuitar.getNumberOfStrings();
+		List<Guitar> allMatchingGuitars = new ArrayList<Guitar>();
+
+		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
+			Guitar guitar = (Guitar) i.next();
+			// Ignore serial number since that's unique
+			// Ignore price since that's unique
+			if ((manufacturer != null) && (!manufacturer.equals(""))
+					&& (!manufacturer.equals(guitar.getManufacturer())))
+				continue;
+			if ((model != null) && (!model.equals("")) && (!model.equalsIgnoreCase(guitar.getModel())))
+				continue;
+			if ((type != null) && (!type.equals("")) && (!type.equals((guitar.getType()))))
+				continue;
+			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equals(guitar.getBackWood())))
+				continue;
+			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equals(guitar.getTopWood())))
+				continue;
+			if (numString != 0 && numString != guitar.getNumberOfStrings())
+				continue;
+			allMatchingGuitars.add(guitar);
+		}
+		return allMatchingGuitars;
 	}
 
 	private List<Guitar> guitars; // guitar inventory

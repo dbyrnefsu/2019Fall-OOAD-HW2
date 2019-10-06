@@ -300,15 +300,17 @@ public class GuitarSwingUI {
 				//double priceHigh = (double) highSpinner.getValue();
 				
 				Guitar searchGuitar = new Guitar(null, 0, spec, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				List<Guitar> allMatchingGuitars = inventory.searchAll(searchGuitar);
 
 				matchingGuitars.clear();
-				if (matching == null) {
+				if (allMatchingGuitars.size() == 0) {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					setFound(allMatchingGuitars.size());
+					for (Guitar g: allMatchingGuitars) {
+						matchingGuitars.addElement(g.toString());
+					}
 				}
 			}
 		});
@@ -333,7 +335,7 @@ public class GuitarSwingUI {
 		windowContentPane.add(greetingField); //$NON-NLS-1$
 		greetingField.setColumns(10);
 		
-		// Show list of maching guitars
+		// Show list of matching guitars
 		this.matchingGuitars = new DefaultListModel<String>();
 		this.list = new JList<String>(this.matchingGuitars);
 		matchingGuitars.addElement("None yet!");

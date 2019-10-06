@@ -178,13 +178,23 @@ public class Guitar implements GuitarInterface {
 	/**
 	 * Checks for the matching guitars and return True/false 
 	 * 
-	 * @param guitar's specifications
+	 * @param guitar's specifications 
 	 * @return true if matching guitars are found else false
 	 */
 	public boolean matches(GuitarSpec otherGs) {
-		if(!this.gs.matches(otherGs))
+		if(otherGs.getManufacturer()!= Manufacturer.Any && this.gs.getManufacturer() !=otherGs.getManufacturer())
 			return false;
-		if(this.price<otherGs.getMinPrice() || this.price>otherGs.getMaxPrice())
+		if(otherGs.getBackWood()!=Wood.Any && this.getBackWood() !=otherGs.getBackWood())
+			return false;
+		if(otherGs.getTopWood() != Wood.Any && this.getTopWood() !=otherGs.getTopWood())
+			return false;
+		if(otherGs.getType()!=Type.Any && this.getType() !=otherGs.getType())
+			return false;
+		if(otherGs.getnumStrings()!=0 && this.getNumberOfStrings() !=otherGs.getnumStrings())
+			return false;
+		if(!otherGs.getModel().equals("") && !this.getModel().equalsIgnoreCase(otherGs.getModel()))
+			return false;
+		if(this.price < otherGs.getMinPrice() || this.price>otherGs.getMaxPrice())
 			return false;
 		return true;
 	}

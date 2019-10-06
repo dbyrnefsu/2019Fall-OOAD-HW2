@@ -173,28 +173,6 @@ public class GuitarSpec implements GuitarInterface {
 	}
 	
 	/**
-	 * Checks for the matching guitars and return True/false 
-	 * 
-	 * @param guitar's specifications
-	 * @return true if matching guitars are found else false
-	 */
-	public boolean matches(GuitarSpec otherGs) {
-		if(otherGs.manufacturer!= Manufacturer.Any && this.manufacturer !=otherGs.manufacturer)
-			return false;
-		if(otherGs.backWood!=Wood.Any && this.backWood !=otherGs.backWood)
-			return false;
-		if(otherGs.topWood != Wood.Any && this.topWood !=otherGs.topWood)
-			return false;
-		if(otherGs.type!=Type.Any && this.type !=otherGs.type)
-			return false;
-		if(otherGs.numStrings!=0 && this.numStrings !=otherGs.numStrings)
-			return false;
-		if(!otherGs.model.equals("") && !this.model.equalsIgnoreCase(otherGs.model))
-			return false;
-		return true;
-	}
-	
-	/**
 	 * The name of the manufacturer
 	 */
 	private Manufacturer manufacturer;

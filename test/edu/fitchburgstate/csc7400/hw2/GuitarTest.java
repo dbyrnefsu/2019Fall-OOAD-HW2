@@ -7,12 +7,12 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import edu.fitchburgstate.csc7400.hw2.Guitar;;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+;
 
 /**
  * Simple tests for guitar class methods
@@ -32,11 +32,11 @@ class GuitarTest {
 		this.testGuitar = new Guitar(
 				"AB123", // serial number
 				203.35, // store price
-				Manufacturer.GIBSON, // Manufacturer
+				GuitarInterface.Manufacturer.GIBSON, // Manufacturer
 				"EasyLearn", // Manufacturer model
-				Type.ELECTRIC, // Type of Guitar
-				Wood.MAPLE, // Back wood
-				Wood.ADIRONDACK, // Face wood
+				GuitarInterface.Type.ELECTRIC, // Type of Guitar
+				GuitarInterface.Wood.MAPLE, // Back wood
+				GuitarInterface.Wood.ADIRONDACK, // Face wood
 				6 // number of strings
 				);
 		System.out.println("not here");

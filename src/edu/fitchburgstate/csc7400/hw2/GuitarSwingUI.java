@@ -8,42 +8,20 @@
 
 package edu.fitchburgstate.csc7400.hw2;
 
-import java.awt.Container;
-import java.awt.EventQueue;
-import java.awt.GridLayout;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.JSpinner;
-import javax.swing.JList;
-import javax.swing.JPanel;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.SwingUtilities;
-import javax.swing.JButton;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.Document;
 import javax.swing.text.JTextComponent;
-
-import javax.swing.event.ChangeEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.beans.PropertyChangeEvent;
-import java.awt.event.ItemListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 /**
  * GuitarRun provides a simple search interface for Rick's Guitars. It is meant for testing.
@@ -87,17 +65,29 @@ public class GuitarSwingUI {
 		InventoryTestData.initializeInventory(inventory);
 		initialize();
 	}
-	
+
 	/**
 	 * Create and return the list of choices including the wild card
-	 * 
+	 *
 	 * @param list the list of choices for a drop box
 	 * @return list of choices with the wild card value prepended
 	 */
-	private String[] createLookupList(String[] list) {
+	private String[] createLookupList(Object[] list) {
 		List<String> choices = new ArrayList<String>();
 		choices.add(WILD_CARD);
-		choices.addAll(Arrays.asList(list));
+		// To take into account enum data types
+		for (Object obj : list) {
+			if (list.getClass().getSimpleName().equals(GuitarInterface.Manufacturer[].class.getSimpleName())) {
+				GuitarInterface.Manufacturer manufacturer = (GuitarInterface.Manufacturer) obj;
+				choices.add(manufacturer.toString());
+			} else if (list.getClass().getSimpleName().equals(GuitarInterface.Type[].class.getSimpleName())) {
+				GuitarInterface.Type type = (GuitarInterface.Type) obj;
+				choices.add(type.toString());
+			} else {
+				GuitarInterface.Wood wood = (GuitarInterface.Wood) obj;
+				choices.add(wood.toString());
+			}
+		}
 		String[] ret = new String[choices.size()];
 		return choices.toArray(ret);
 	}
@@ -288,25 +278,39 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
-				String type = getChosen((String) typeComboBox.getSelectedItem());
-				String topWood = getChosen((String) topWoodComboBox.getSelectedItem());
-				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
+				// Get inputs from the SwingUI
+				String manufacturerStr = getChosen((String)manufacturerComboBox.getSelectedItem());
+				String typeStr = getChosen((String)typeComboBox.getSelectedItem());
+				String twoodStr = getChosen((String)topWoodComboBox.getSelectedItem());
+				String bwoodStr = getChosen((String)backWoodComboBox.getSelectedItem());
+
+				// Convert string input to enum objects
+				GuitarInterface.Manufacturer manufacturer = manufacturerStr==null?null:GuitarInterface.Manufacturer.valueOf(manufacturerStr);
+				GuitarInterface.Type type = typeStr==null?null:GuitarInterface.Type.valueOf(typeStr);
+				GuitarInterface.Wood topWood = twoodStr==null?null:GuitarInterface.Wood.valueOf(twoodStr);
+				GuitarInterface.Wood backWood = bwoodStr==null?null:GuitarInterface.Wood.valueOf(bwoodStr);
+
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
-				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
+
+				Guitar searchGuitar = new Guitar(null, 0, manufacturer, model, type, backWood, topWood, 0);
+				// List to return multiple guitars
+				List<Guitar> matchingGuitarList = inventory.search(searchGuitar);
 
 				matchingGuitars.clear();
-				if (matching == null) {
+				if (matchingGuitarList ==null) {
 					setNotFound();
-				}
-				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+				} else {
+					for (Guitar guitar : matchingGuitarList) {
+						// To take into account min/max price range in the seacrh
+						if (priceLow <= guitar.getPrice() && guitar.getPrice() <= priceHigh) {
+							matchingGuitars.addElement(guitar.toString());
+						}
+					}
+					if (matchingGuitars.isEmpty()) setNotFound();
+					else setFound(matchingGuitars.size());
 				}
 			}
 		});

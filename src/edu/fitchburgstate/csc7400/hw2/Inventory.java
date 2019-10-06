@@ -7,6 +7,7 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +66,8 @@ public class Inventory {
 	 * @precondition backWood != null
 	 * @precondition numStrings >= 6 or null
 	 */
-	public void addGuitar(String serialNumber, double price, Manufacturer manufacturer, Type type, String model,
-			Wood topWood, Wood backWood, Integer numStrings) {
+	public void addGuitar(String serialNumber, double price, GuitarInterface.Manufacturer manufacturer, GuitarInterface.Type type, String model,
+						  GuitarInterface.Wood topWood, GuitarInterface.Wood backWood, Integer numStrings) {
 		assert serialNumber != null;
 		assert price > 0;
 		assert manufacturer != null;
@@ -75,8 +76,7 @@ public class Inventory {
 		assert topWood != null;
 		assert backWood != null;
 		assert numStrings >= 0;
-		
-		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model,type, topWood, backWood, numStrings);
+		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model,type, backWood, topWood, numStrings);
 		this.addGuitar(guitar);
 	}
 
@@ -98,21 +98,21 @@ public class Inventory {
 	}
 
 	/**
-	 * Finds and returns a guitar that matches a provided guitar. Any null in
+	 * Finds and returns a list of guitars that matches a provided guitar. Any null in
 	 * spec are consider wildcards.
 	 * 
 	 * @param searchGuitar
 	 *            the guitar with qualities we want to match
-	 * @return the found guitar, may be null
+	 * @return the found guitar list, may be null
 	 */
-	public Guitar search(Guitar searchGuitar) {
-		Manufacturer manufacturer = searchGuitar.getManufacturer();
+	public List<Guitar> search(Guitar searchGuitar) {
+		GuitarInterface.Manufacturer manufacturer = searchGuitar.getManufacturer();
 		String model = searchGuitar.getModel();
-		Type type = searchGuitar.getType();
-		Wood backWood = searchGuitar.getBackWood();
-		Wood topWood = searchGuitar.getTopWood();
+		GuitarInterface.Type type = searchGuitar.getType();
+		GuitarInterface.Wood backWood = searchGuitar.getBackWood();
+		GuitarInterface.Wood topWood = searchGuitar.getTopWood();
 		int numString = searchGuitar.getNumberOfStrings();
-
+		List<Guitar> guitarList = new ArrayList<>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 			// Ignore serial number since that's unique
@@ -130,9 +130,9 @@ public class Inventory {
 				continue;
 			if (numString != 0 && numString != guitar.getNumberOfStrings())
 				continue;
-			return guitar;
+			guitarList.add(guitar);
 		}
-		return null;
+		return guitarList.isEmpty()? null:guitarList;
 	}
 
 	private List<Guitar> guitars; // guitar inventory

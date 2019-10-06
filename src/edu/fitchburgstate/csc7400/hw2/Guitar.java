@@ -18,6 +18,56 @@ package edu.fitchburgstate.csc7400.hw2;
 public class Guitar implements GuitarInterface {
 
 	/**
+	 * The guitars manufacturer serial number
+	 */
+	private String serialNumber;
+
+	/**
+	 * The name of the manufacturer
+	 */
+	private Manufacturer manufacturer;
+
+	/**
+	 * The manufacturer model number
+	 */
+	private String model;
+
+	/**
+	 * The guitar type (electric/acoustic)
+	 */
+	private Type type;
+
+	/**
+	 * The wood used for the back of the guitar
+	 */
+	private Wood backWood;
+
+	/**
+	 * The wood used for the face of the guitar
+	 */
+	private Wood topWood;
+
+	/**
+	 * Rick's price for the guitar
+	 */
+	private double price;
+
+	/**
+	 * Guitars number of strings
+	 */
+	private int numberOfStrings;
+
+	/**
+	 * Specification of the guitar
+	 */
+	private GuitarSpec guitarSpec;
+
+	/**
+	 * Formatting string for toString()
+	 */
+	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
+
+	/**
 	 * Full constructor
 	 * 
 	 * @param serialNumber manufacturer serial number
@@ -27,7 +77,7 @@ public class Guitar implements GuitarInterface {
 	 * @param type guitar type (electric/acoustic)
 	 * @param backWood the wood used for the guitar body
 	 * @param topWood the wood used for the guitar's face
-	 * @param numString the number of strings for this guitar
+	 * @param numStrings the number of strings for this guitar
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
@@ -160,114 +210,38 @@ public class Guitar implements GuitarInterface {
 	}
 
 	/**
-	 * The guitars manufacturer serial number
-	 */
-	private String serialNumber;
-
-	/**
-	 * The name of the manufacturer
-	 */
-	private Manufacturer manufacturer;
-
-	/**
-	 * The manufacturer model number
-	 */
-	private String model;
-
-	/**
-	 * The guitar type (electric/acoustic)
-	 */
-	private Type type;
-
-	/**
-	 * The wood used for the back of the guitar
-	 */
-	private Wood backWood;
-
-	/**
-	 * The wood used for the face of the guitar
-	 */
-	private Wood topWood;
-
-	/**
-	 * Rick's price for the guitar
-	 */
-	private double price;
-	
-	/**
-	 * Guitars number of strings
-	 */
-	private int numberOfStrings;
-	
-	/**
-	 * Specification of the guitar
-	 */
-	private GuitarSpec guitarSpec;
-
-	/**
-	 * Formatting string for toString()
-	 */
-	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
-
-
-	/**
-	 * Validates if the given guitar specification is equal to other guitar
-	 * specification. 
+	 * Validates if the given guitar is equal to the other guitar
+	 *
 	 * @param obj
-	 * @return true if equals, false if not equal
+	 * @return	true	: If there is an exact match / all of the specifications matches
+	 * 			false	: If there is NO exact match / any of the specification DOESN'T match
 	 */
+
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
+		if (this == obj) return true;
+		if (null == obj || getClass() != obj.getClass()) return false;
 		Guitar other = (Guitar) obj;
-		if (backWood != other.backWood) {
-			return false;
-		}
-		if (guitarSpec == null) {
-			if (other.guitarSpec != null) {
-				return false;
-			}
-		} else if (!guitarSpec.equals(other.guitarSpec)) {
-			return false;
-		}
-		if (manufacturer != other.manufacturer) {
-			return false;
-		}
-		if (model == null) {
-			if (other.model != null) {
-				return false;
-			}
-		} else if (!model.equals(other.model)) {
-			return false;
-		}
-		if (numberOfStrings != other.numberOfStrings) {
-			return false;
-		}
-		if (Double.doubleToLongBits(price) != Double.doubleToLongBits(other.price)) {
-			return false;
-		}
-		if (serialNumber == null) {
-			if (other.serialNumber != null) {
-				return false;
-			}
-		} else if (!serialNumber.equals(other.serialNumber)) {
-			return false;
-		}
-		if (topWood != other.topWood) {
-			return false;
-		}
-		if (type != other.type) {
-			return false;
-		}
-		return true;
+
+		return (serialNumber != null && serialNumber.equalsIgnoreCase(other.getSerialNumber()) &&
+				this.getGuitarSpec().equals(other.getGuitarSpec()) &&
+				numberOfStrings == other.getNumberOfStrings() &&
+				Double.doubleToLongBits(price) == Double.doubleToLongBits(other.getPrice())
+		);
+	}
+
+	/**
+	 * Determines whether the given guitar matches at-least one of the values of the other guitarspec
+	 *
+	 * @param obj Guitar to be compared
+	 * @return 	true	: At-least one specification matches
+	 * 			false	: No match found
+	 */
+	public boolean matches(Object obj) {
+		if ((null != obj) && getClass() == obj.getClass()) {
+			Guitar other = (Guitar) obj;
+			return this.getGuitarSpec().matches(other.getGuitarSpec());
+		} else return false;
 	}
 	
 }

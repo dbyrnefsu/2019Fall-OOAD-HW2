@@ -24,7 +24,8 @@ public class InventoryTestData {
 			Manufacturer.Gibson, // 3
 			Manufacturer.Olson, // 4
 			Manufacturer.PRS, // 5
-			Manufacturer.Ryan // 6
+			Manufacturer.Ryan, // 6
+			Manufacturer.Any  // 7 Wildcard
 	};
 
 	/**
@@ -32,7 +33,8 @@ public class InventoryTestData {
 	 */
 	public static Type[] TYPES = {
 		Type.Acoustic, // 0
-		Type.Electric // 2
+		Type.Electric, // 2
+		Type.Any // 3 wildcard
 	};
 	
 	/**
@@ -47,7 +49,8 @@ public class InventoryTestData {
 		Wood.IndianRosewood, // 5 
 		Wood.Mahogany, // 6
 		Wood.Maple, // 7
-		Wood.Sitka // 8
+		Wood.Sitka, // 8
+		Wood.Any // 9 Wildcard
 	};
 
 	/**

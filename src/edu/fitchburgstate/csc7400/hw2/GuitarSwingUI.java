@@ -89,37 +89,12 @@ public class GuitarSwingUI {
 	}
 	
 	/**
-	 * Create and return the list of choices including the wild card
-	 * 
-	 * @param list the list of choices for a drop box
-	 * @return list of choices with the wild card value prepended
-	 */
-	private String[] createLookupList(String[] list) {
-		List<String> choices = new ArrayList<String>();
-		choices.add(WILD_CARD);
-		choices.addAll(Arrays.asList(list));
-		String[] ret = new String[choices.size()];
-		return choices.toArray(ret);
-	}
-
-	/**
-	 * Returns null for wild card otherwise returns value
-	 * 
-	 * @param chosen the chosen value
-	 * @return the chosen value or null if wild card was chosen
-	 */
-	private String getChosen(String chosen) {
-		if (WILD_CARD.equals(chosen)) return null;
-		else return chosen;
-	}
-
-	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[] manufacturers = createLookupList(InventoryTestData.MANUFACTURERS);
-		String[] types = createLookupList(InventoryTestData.TYPES);
-		String[] woods = createLookupList(InventoryTestData.WOODS);
+		Manufacturer[] manufacturers = InventoryTestData.MANUFACTURERS;
+		Type[] types = InventoryTestData.TYPES;
+		Wood[] woods = InventoryTestData.WOODS;
 		
 		frmRicksGuitars = new JFrame();
 		frmRicksGuitars.setTitle(Messages.getString("GuitarRun.Title")); //$NON-NLS-1$
@@ -153,10 +128,10 @@ public class GuitarSwingUI {
 		btnNewSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
-				manufacturerComboBox.setSelectedItem(WILD_CARD);
-				typeComboBox.setSelectedItem(WILD_CARD);
-				topWoodComboBox.setSelectedItem(WILD_CARD);
-				backWoodComboBox.setSelectedItem(WILD_CARD);
+				manufacturerComboBox.setSelectedItem(Manufacturer.Any);
+				typeComboBox.setSelectedItem(Type.Any);
+				topWoodComboBox.setSelectedItem(Wood.Any);
+				backWoodComboBox.setSelectedItem(Wood.Any);
 				txtEnterModel.setText(null);
 				lowSpinner.setValue(PRICE_MIN);
 				highSpinner.setValue(PRICE_MAX);
@@ -171,9 +146,9 @@ public class GuitarSwingUI {
 		JLabel lblManufacturer = new JLabel(Messages.getString("GuitarRun.BuilderLabel")); //$NON-NLS-1$
 		questionPane.add(lblManufacturer); //$NON-NLS-1$
 		
-		manufacturerComboBox = new JComboBox<Manufacturer>();
+		manufacturerComboBox = new JComboBox<Manufacturer>(manufacturers);
 		manufacturerComboBox.setToolTipText(Messages.getString("GuitarRun.BuilderTip")); //$NON-NLS-1$
-		manufacturerComboBox.setModel(new DefaultComboBoxModel<String>(manufacturers));
+		//manufacturerComboBox.setModel(new DefaultComboBoxModel<String>(manufacturers));
 		manufacturerComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) setWhenReady();
@@ -185,9 +160,9 @@ public class GuitarSwingUI {
 		JLabel lblTypeOfGuitar = new JLabel(Messages.getString("GuitarRun.TypeLabel")); //$NON-NLS-1$
 		questionPane.add(lblTypeOfGuitar); //$NON-NLS-1$
 		
-		typeComboBox = new JComboBox<String>();
+		typeComboBox = new JComboBox<Type>(types);
 		typeComboBox.setToolTipText(Messages.getString("GuitarRun.TypeTip")); //$NON-NLS-1$
-		typeComboBox.setModel(new DefaultComboBoxModel<String>(types));
+		//typeComboBox.setModel(new DefaultComboBoxModel<String>(types));
 		typeComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) setWhenReady();
@@ -199,9 +174,9 @@ public class GuitarSwingUI {
 		JLabel lblTopWood = new JLabel(Messages.getString("GuitarRun.TopWoodLabel")); //$NON-NLS-1$
 		questionPane.add(lblTopWood); //$NON-NLS-1$
 		
-		topWoodComboBox = new JComboBox<String>();
+		topWoodComboBox = new JComboBox<Wood>(woods);
 		topWoodComboBox.setToolTipText(Messages.getString("GuitarRun.TopWoodTip")); //$NON-NLS-1$
-		topWoodComboBox.setModel(new DefaultComboBoxModel<String>(woods));
+		//topWoodComboBox.setModel(new DefaultComboBoxModel<String>(woods));
 		topWoodComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) setWhenReady();
@@ -213,9 +188,9 @@ public class GuitarSwingUI {
 		JLabel lblBackWood = new JLabel(Messages.getString("GuitarRun.BackWoodLabel")); //$NON-NLS-1$
 		questionPane.add(lblBackWood); //$NON-NLS-1$
 		
-		backWoodComboBox = new JComboBox<String>();
+		backWoodComboBox = new JComboBox<Wood>(woods);
 		backWoodComboBox.setToolTipText(Messages.getString("GuitarRun.BackWoodTip")); //$NON-NLS-1$
-		backWoodComboBox.setModel(new DefaultComboBoxModel<String>(woods));
+		//backWoodComboBox.setModel(new DefaultComboBoxModel<String>(woods));
 		backWoodComboBox.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent arg0) {
 				if (arg0.getStateChange() == ItemEvent.SELECTED) setWhenReady();
@@ -288,25 +263,27 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				Manufacturer manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
-				Type type = getChosen((String) typeComboBox.getSelectedItem());
-				Wood topWood = getChosen((String) topWoodComboBox.getSelectedItem());
-				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
+				Manufacturer manufacturer = (Manufacturer) manufacturerComboBox.getSelectedItem();
+				Type type = (Type) typeComboBox.getSelectedItem();
+				Wood topWood = (Wood) topWoodComboBox.getSelectedItem();
+				Wood backWood = (Wood) backWoodComboBox.getSelectedItem();
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, model, type, backWood, topWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, model, type, backWood, topWood, 0,priceLow,priceHigh);
+				List<Guitar> matchingList = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
-				if (matching == null) {
+				if (matchingList.isEmpty()) {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					setFound(matchingList.size());
+					for(Guitar g:matchingList) {
+						matchingGuitars.addElement(g.toString());
+					}
 				}
 			}
 		});

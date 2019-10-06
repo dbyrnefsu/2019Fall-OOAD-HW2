@@ -83,7 +83,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search() {
-		GuitarSpec searchGuitar = new GuitarSpec( Manufacturer.Fender,"Stratocastor", Type.Electric, Wood.Alder, Wood.Alder,null);
+		GuitarSpec searchGuitar = new GuitarSpec( Manufacturer.Fender,"Stratocastor", Type.Electric, Wood.Alder, Wood.Alder,null,0,20000);
 		String[] serialNumbers = { "V95693","V9512" };
 		this.searchTester(searchGuitar, serialNumbers);
 	}
@@ -93,7 +93,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_case() {
-		GuitarSpec searchGuitarSpec = new GuitarSpec( Manufacturer.Fender, "STratocastor", Type.Electric, Wood.Alder, Wood.Alder,null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec( Manufacturer.Fender, "STratocastor", Type.Electric, Wood.Alder, Wood.Alder,null,0,20000);
 		String[] serialNumbers = { "V95693","V9512" };
 		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
@@ -103,11 +103,11 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_manufacturer() {
-		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Gibson, null, Type.Any, Wood.Any, Wood.Any,null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Gibson, null, Type.Any, Wood.Any, Wood.Any,null,0,20000);
 		String[] serialNumbers = { "70108276","82765501" };
 		this.searchTester(searchGuitarSpec, serialNumbers);
 
-		GuitarSpec searchGuitarSpec2 = new GuitarSpec( Manufacturer.Collins, null, Type.Any, Wood.Any, Wood.Any,null);
+		GuitarSpec searchGuitarSpec2 = new GuitarSpec( Manufacturer.Collins, null, Type.Any, Wood.Any, Wood.Any,null,0,20000);
 		String[] serialNumbers2 = { "11277" };
 		this.searchTester(searchGuitarSpec2, serialNumbers2);
 	}
@@ -118,7 +118,7 @@ public class InventoryTest {
 	@Test
 	public void test_search_type() {
 	
-		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Any, null, Type.Acoustic, Wood.Any, Wood.Any,null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Any, null, Type.Acoustic, Wood.Any, Wood.Any,null,0,20000);
 		String[] serialNumbers = { "11277","122784", "76531", "77023", "1092", "566-62","GPC12PA4" };
 		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
@@ -128,7 +128,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_2Attrib() {
-		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Martin, null, Type.Any, Wood.BrazilianRosewood, Wood.Any,null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Martin, null, Type.Any, Wood.BrazilianRosewood, Wood.Any,null,0,20000);
 		String[] serialNumbers = { "76531","77023" };
 		this.searchTester(searchGuitarSpec, serialNumbers);
 	}
@@ -138,17 +138,26 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_numstrings() {
-		GuitarSpec searchGuitarSpec = new GuitarSpec( Manufacturer.Any, null, Type.Any, Wood.Any, Wood.Any,12);
+		GuitarSpec searchGuitarSpec = new GuitarSpec( Manufacturer.Any, null, Type.Any, Wood.Any, Wood.Any,12,0,20000);
 		String[] serialNumbers = { "GPC12PA4" };
 		this.searchTester(searchGuitarSpec, serialNumbers);
-}
+	}
+	/**
+	 * Test search with price range
+	 */
+	@Test
+	public void test_search_price_range() {
+		GuitarSpec searchGuitarSpec = new GuitarSpec( Manufacturer.Any, null, Type.Any, Wood.Any, Wood.Any,0,1500,2000);
+		String[] serialNumbers = { "V9512","82765501","GPC12PA4" };
+		this.searchTester(searchGuitarSpec, serialNumbers);
+	}
 	
 	/**
 	 * Test to make sure nothing comes back if no match
 	 */
 	@Test
 	public void test_search_notFound() {
-		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Any, "LEXUS", Type.Any, Wood.Any, Wood.Any,null);
+		GuitarSpec searchGuitarSpec = new GuitarSpec(Manufacturer.Any, "LEXUS", Type.Any, Wood.Any, Wood.Any,null,0,20000);
 		Assert.assertTrue("Should not have found any guitars", this.guitarInventory.search(searchGuitarSpec).isEmpty());
 	}
 	

@@ -47,7 +47,9 @@ public class Guitar implements GuitarInterface {
 				type,
 				backWood,
 				topWood,
-				numStrings);
+				numStrings,
+				price,
+				price);
 		
 	}
 	
@@ -180,7 +182,11 @@ public class Guitar implements GuitarInterface {
 	 * @return true if matching guitars are found else false
 	 */
 	public boolean matches(GuitarSpec otherGs) {
-		return this.gs.matches(otherGs);
+		if(!this.gs.matches(otherGs))
+			return false;
+		if(this.price<otherGs.getMinPrice() || this.price>otherGs.getMaxPrice())
+			return false;
+		return true;
 	}
 	
 

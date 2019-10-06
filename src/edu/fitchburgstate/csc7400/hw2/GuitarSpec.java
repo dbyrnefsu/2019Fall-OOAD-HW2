@@ -31,7 +31,9 @@ public class GuitarSpec implements GuitarInterface {
 			Type type,
 			Wood backWood,
 			Wood topWood,
-			Integer numStrings)
+			Integer numStrings,
+			double minPrice,
+			double maxPrice)
 			 {
 		setManufacturer(manufacturer);
 		setModel(model);
@@ -39,6 +41,8 @@ public class GuitarSpec implements GuitarInterface {
 		setTopWood(topWood);
 		setBackWood(backWood);
 		setnumStrings(numStrings);
+		setMinPrice(minPrice);
+		setMaxPrice(maxPrice);
 	}
 	
 	/**
@@ -128,6 +132,23 @@ public class GuitarSpec implements GuitarInterface {
 		return numStrings;
 	}
 	
+	public void setMinPrice(double minPrice) {
+		this.minPrice = minPrice;
+	}
+	
+	public double getMinPrice() {
+		return minPrice;
+	}
+	
+	public void setMaxPrice(double maxPrice) {
+		this.maxPrice = maxPrice;
+	}
+
+	public double getMaxPrice() {
+		return maxPrice;
+	}
+	
+	
 	
 	/**
 	 * Compares two guitars with the specifications and return True/false 
@@ -202,6 +223,16 @@ public class GuitarSpec implements GuitarInterface {
 	 * The num of strings of the guitar
 	 */
 	private Integer numStrings;
+	
+	/**
+	 * The minimum price of the guitarSpec
+	 */
+	private double minPrice;
+	
+	/**
+	 * The max price of the guitar
+	 */
+	private double maxPrice;
 	
 	/**
 	 * Turn object into a readable string

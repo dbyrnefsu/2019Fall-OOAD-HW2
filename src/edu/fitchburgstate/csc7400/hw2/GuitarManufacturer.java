@@ -7,6 +7,7 @@ public enum GuitarManufacturer {
 	FENDER("Fender"),
 	MARTIN("Martin"),
 	GIBSON("Gibson"),
+	LEXUS("Lexud"),
 	OLSON("Olson"),
 	PRS("PRS"),
 	RYAN("Ryan");

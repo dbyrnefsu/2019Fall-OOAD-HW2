@@ -117,6 +117,9 @@ public class Guitar implements GuitarInterface {
 	 */
 	@Override
 	public GuitarType getType() {
+		if (this.guitarSpec == null) {
+			return null;
+		}
 		return this.guitarSpec.getType();
 	}
 
@@ -125,6 +128,9 @@ public class Guitar implements GuitarInterface {
 	 */
 	@Override
 	public GuitarManufacturer getManufacturer() {
+		if (this.guitarSpec == null) {
+			return null;
+		}
 		return this.guitarSpec.getManufacturer();
 	}
 
@@ -133,6 +139,9 @@ public class Guitar implements GuitarInterface {
 	 */
 	@Override
 	public GuitarWood getTopWood() {
+		if (this.guitarSpec == null) {
+			return null;
+		}
 		return this.guitarSpec.getTopWood();
 	}
 
@@ -141,6 +150,9 @@ public class Guitar implements GuitarInterface {
 	 */
 	@Override
 	public GuitarWood getBackWood() {
+		if (this.guitarSpec == null) {
+			return null;
+		}
 		return this.guitarSpec.getBackWood();
 	}
 
@@ -149,6 +161,9 @@ public class Guitar implements GuitarInterface {
 	 */
 	@Override
 	public String getModel() {
+		if (this.guitarSpec == null) {
+			return null;
+		}
 		return this.guitarSpec.getModel();
 	}
 	

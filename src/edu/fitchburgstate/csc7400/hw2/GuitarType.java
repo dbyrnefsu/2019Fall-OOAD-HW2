@@ -17,6 +17,13 @@ public enum GuitarType {
 	public static String[] getStringArray() {
 		return Arrays.toString(GuitarType.values()).replaceAll("^.|.$", "").split(", ");
 	}
+	
+	public static GuitarType getValueFromName(String name) {
+		for (GuitarType g : GuitarType.values()) {
+			if (g.displayName() == name) { return g; }
+		}
+		return null;
+	}
 
     @Override public String toString() { return displayName; }
 }

@@ -24,6 +24,13 @@ public enum GuitarWood {
 	public static String[] getStringArray() {
 		return Arrays.toString(GuitarWood.values()).replaceAll("^.|.$", "").split(", ");
 	}
+	
+	public static GuitarWood getValueFromName(String name) {
+		for (GuitarWood g : GuitarWood.values()) {
+			if (g.displayName() == name) { return g; }
+		}
+		return null;
+	}
 
     @Override public String toString() { return displayName; }
 

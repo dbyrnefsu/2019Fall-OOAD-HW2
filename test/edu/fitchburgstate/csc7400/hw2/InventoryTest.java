@@ -52,6 +52,8 @@ public class InventoryTest {
 					GuitarWood.ALDER, "Stratocastor"), 
 			6);
 		
+		//@TODO Convert the rest of these
+		
 		inventory.addGuitar("V9512", 1549.95, "FENDER", "ELECTRIC", "Stratocastor", "ALDER", "ALDER", 6);
 		inventory.addGuitar("122784", 5495.95, "MARTIN", "ACOUSTIC", "D-18", "MAHOGANY", "ADIRONDACK", 6);
 		inventory.addGuitar("76531", 6295.95, "MARTIN", "ACOUSTIC", "OM-28", "BRAZILIAN_ROSEWOOD",

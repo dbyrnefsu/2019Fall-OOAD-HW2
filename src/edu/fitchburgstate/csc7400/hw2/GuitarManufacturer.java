@@ -22,6 +22,13 @@ public enum GuitarManufacturer {
 	public static String[] getStringArray() {
 		return Arrays.toString(GuitarManufacturer.values()).replaceAll("^.|.$", "").split(", ");
 	}
+	
+	public static GuitarManufacturer getValueFromName(String name) {
+		for (GuitarManufacturer g : GuitarManufacturer.values()) {
+			if (g.displayName() == name) { return g; }
+		}
+		return null;
+	}
 
     @Override public String toString() { return displayName; }
 }

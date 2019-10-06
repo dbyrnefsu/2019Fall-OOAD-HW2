@@ -288,10 +288,11 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				GuitarManufacturer manufacturer = GuitarManufacturer.valueOf(getChosen((String) manufacturerComboBox.getSelectedItem()));
-				GuitarType type = GuitarType.valueOf(getChosen((String) typeComboBox.getSelectedItem()));
-				GuitarWood topWood = GuitarWood.valueOf(getChosen((String) topWoodComboBox.getSelectedItem()));
-				GuitarWood backWood = GuitarWood.valueOf(getChosen((String) backWoodComboBox.getSelectedItem()));
+				System.out.println( manufacturerComboBox.getSelectedItem());
+				GuitarManufacturer manufacturer = GuitarManufacturer.getValueFromName((String)manufacturerComboBox.getSelectedItem());
+				GuitarType type = GuitarType.getValueFromName((String) typeComboBox.getSelectedItem());
+				GuitarWood topWood = GuitarWood.getValueFromName((String) topWoodComboBox.getSelectedItem());
+				GuitarWood backWood = GuitarWood.getValueFromName((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				GuitarSpec spec = new GuitarSpec(manufacturer, type, topWood, backWood, model);
 				if (model != null && model.isEmpty()) model = null;

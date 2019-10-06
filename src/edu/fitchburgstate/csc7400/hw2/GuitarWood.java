@@ -1,5 +1,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
+import java.util.Arrays;
+
 public enum GuitarWood {
 	ADIRONDACK("Adirondack"),
 	ALDER("Alder"),
@@ -18,6 +20,10 @@ public enum GuitarWood {
 	}
 	
 	public String displayName() { return displayName; }
+	
+	public static String[] getStringArray() {
+		return Arrays.toString(GuitarWood.values()).replaceAll("^.|.$", "").split(", ");
+	}
 
     @Override public String toString() { return displayName; }
 

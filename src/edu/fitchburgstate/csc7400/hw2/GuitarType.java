@@ -1,5 +1,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
+import java.util.Arrays;
+
 public enum GuitarType {
 	ACOUSTIC("Acoustic"),
 	ELECTRIC("Electric");
@@ -11,6 +13,10 @@ public enum GuitarType {
 	}
 	
 	public String displayName() { return displayName; }
+	
+	public static String[] getStringArray() {
+		return Arrays.toString(GuitarType.values()).replaceAll("^.|.$", "").split(", ");
+	}
 
     @Override public String toString() { return displayName; }
 }

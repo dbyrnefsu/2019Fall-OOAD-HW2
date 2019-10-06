@@ -117,9 +117,9 @@ public class GuitarSwingUI {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[] manufacturers = createLookupList(InventoryTestData.MANUFACTURERS);
-		String[] types = createLookupList(InventoryTestData.TYPES);
-		String[] woods = createLookupList(InventoryTestData.WOODS);
+		String[] manufacturers = createLookupList(GuitarManufacturer.getStringArray());
+		String[] types = createLookupList(GuitarType.getStringArray());
+		String[] woods = createLookupList(GuitarWood.getStringArray());
 		
 		frmRicksGuitars = new JFrame();
 		frmRicksGuitars.setTitle(Messages.getString("GuitarRun.Title")); //$NON-NLS-1$

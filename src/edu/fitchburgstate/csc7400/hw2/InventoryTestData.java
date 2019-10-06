@@ -8,9 +8,6 @@
 
 package edu.fitchburgstate.csc7400.hw2;
 
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarManufacturer;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarWood;
-import edu.fitchburgstate.csc7400.hw2.GuitarInterface.GuitarType;
 
 /**
  * InventoryTestData sets up some test data for us to play with
@@ -60,22 +57,17 @@ public class InventoryTestData {
 	 * Fills inventory with a set of test guitars.
 	 */
 	public static void initializeInventory(Inventory inventory) {
-		inventory.addGuitar("11277", 3999.95, GuitarManufacturer.COLLINS, GuitarType.ACOUSTIC, "CJ", GuitarWood.INDIANROSEWOOD, GuitarWood.SITKA, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("V95693", 1499.95, GuitarManufacturer.FENDER, GuitarType.ELECTRIC, "Stratocastor", GuitarWood.ALDER, GuitarWood.ALDER, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("V9512", 1549.95, GuitarManufacturer.FENDER, GuitarType.ELECTRIC, "Stratocastor", GuitarWood.ALDER, GuitarWood.ALDER, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("122784", 5495.95, GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, "D-18", GuitarWood.MAHOGANY, GuitarWood.ADIRONDACK, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("76531", 6295.95, GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, "OM-28", GuitarWood.BRAZILIANROSEWOOD, //$NON-NLS-1$ //$NON-NLS-2$
-				GuitarWood.ADIRONDACK, 6);
-		inventory.addGuitar("70108276", 2295.95, GuitarManufacturer.GIBSON, GuitarType.ELECTRIC, "Les Paul", GuitarWood.MAHOGANY, //$NON-NLS-1$ //$NON-NLS-2$
-				GuitarWood.MAHOGANY, 6);
-		inventory.addGuitar("82765501", 1890.95, GuitarManufacturer.GIBSON, GuitarType.ELECTRIC, "SG '61 Reissue", GuitarWood.MAHOGANY, //$NON-NLS-1$ //$NON-NLS-2$
-				GuitarWood.MAHOGANY, 6);
-		inventory.addGuitar("77023", 6275.95, GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, "D-28", GuitarWood.BRAZILIANROSEWOOD, //$NON-NLS-1$ //$NON-NLS-2$
-				GuitarWood.ADIRONDACK, 6);
-		inventory.addGuitar("1092", 12995.95, GuitarManufacturer.OLSON, GuitarType.ACOUSTIC, "SJ", GuitarWood.INDIANROSEWOOD, GuitarWood.CEDAR, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("566-62", 8999.95, GuitarManufacturer.RYAN, GuitarType.ACOUSTIC, "Cathedral", GuitarWood.COCOBOLO, GuitarWood.CEDAR, 6); //$NON-NLS-1$ //$NON-NLS-2$
-		inventory.addGuitar("6 29584", 2100.95, GuitarManufacturer.PRS, GuitarType.ELECTRIC, "Dave Navarro Signature", GuitarWood.MAHOGANY, //$NON-NLS-1$ //$NON-NLS-2$
-				GuitarWood.MAPLE, 6);
-		inventory.addGuitar("GPC12PA4", 1595.95, GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, "GPC12PA4", GuitarWood.MAPLE, GuitarWood.SITKA, 12); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("11277", 3999.95, new GuitarSpec(GuitarManufacturer.COLLINS, GuitarType.ACOUSTIC,  GuitarWood.INDIANROSEWOOD, GuitarWood.SITKA, "CJ"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("V95693", 1499.95, new GuitarSpec(GuitarManufacturer.FENDER, GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER, "Stratocastor"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("V9512", 1549.95, new GuitarSpec(GuitarManufacturer.FENDER, GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER, "Stratocastor"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("122784", 5495.95, new GuitarSpec(GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, GuitarWood.MAHOGANY, GuitarWood.ADIRONDACK, "D-18"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("76531", 6295.95, new GuitarSpec(GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, GuitarWood.BRAZILIANROSEWOOD, GuitarWood.ADIRONDACK, "OM-28"), 6);
+		inventory.addGuitar("70108276", 2295.95, new GuitarSpec(GuitarManufacturer.GIBSON, GuitarType.ELECTRIC, GuitarWood.MAHOGANY, GuitarWood.MAHOGANY, "Les Paul"), 6);
+		inventory.addGuitar("82765501", 1890.95, new GuitarSpec(GuitarManufacturer.GIBSON, GuitarType.ELECTRIC, GuitarWood.MAHOGANY, GuitarWood.MAHOGANY, "SG '61 Reissue"), 6);
+		inventory.addGuitar("77023", 6275.95, new GuitarSpec(GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, GuitarWood.BRAZILIANROSEWOOD, GuitarWood.ADIRONDACK, "D-28"), 6);
+		inventory.addGuitar("1092", 12995.95, new GuitarSpec(GuitarManufacturer.OLSON, GuitarType.ACOUSTIC, GuitarWood.INDIANROSEWOOD, GuitarWood.CEDAR, "SJ"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("566-62", 8999.95, new GuitarSpec(GuitarManufacturer.RYAN, GuitarType.ACOUSTIC, GuitarWood.COCOBOLO, GuitarWood.CEDAR, "Cathedral"), 6); //$NON-NLS-1$ //$NON-NLS-2$
+		inventory.addGuitar("6 29584", 2100.95, new GuitarSpec(GuitarManufacturer.PRS, GuitarType.ELECTRIC, GuitarWood.MAHOGANY, GuitarWood.MAPLE, "Dave Navarro Signature"), 6);
+		inventory.addGuitar("GPC12PA4", 1595.95, new GuitarSpec(GuitarManufacturer.MARTIN, GuitarType.ACOUSTIC, GuitarWood.MAPLE, GuitarWood.SITKA, "GPC12PA4"),  12); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 }

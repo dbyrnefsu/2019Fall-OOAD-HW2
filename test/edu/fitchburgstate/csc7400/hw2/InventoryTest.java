@@ -164,11 +164,11 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_manufacturer() {
-		Guitar searchGuitar = new Guitar(null, 0, "GIBSON", null, null, null, null, null);
+		Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec(GuitarManufacturer.GIBSON, null, null, null, null), null);
 		String[] serialNumbers = { "70108276","82765501" };
 		this.searchTester(searchGuitar, serialNumbers);
 
-		searchGuitar = new Guitar(null, 0, "COLLINGS", null, null, null, null, null);
+		searchGuitar = new Guitar(null, 0, new GuitarSpec(GuitarManufacturer.COLLINS, null, null, null, null), null);
 		String[] serialNumbers2 = { "11277" };
 		this.searchTester(searchGuitar, serialNumbers2);
 	}
@@ -178,8 +178,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_type() {
-	
-		Guitar searchGuitar = new Guitar(null, 0, null, "ACOUSTIC", null, null, null, null);
+		Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec(null, GuitarType.ACOUSTIC, null, null, null), null);
 		String[] serialNumbers = { "11277","122784", "76531", "77023", "1092", "566-62" };
 		this.searchTester(searchGuitar, serialNumbers);
 	}
@@ -189,7 +188,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_2Attrib() {
-		Guitar searchGuitar = new Guitar(null, 0, "MARTIN", null, null, "BRAZILIAN_ROSEWOOD", null, null);
+		Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec(GuitarManufacturer.MARTIN, null, GuitarWood.BRAZILIANROSEWOOD, null, null), null);
 		String[] serialNumbers = { "76531","77023" };
 		this.searchTester(searchGuitar, serialNumbers);
 	}
@@ -199,7 +198,7 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_numstrings() {
-		Guitar searchGuitar = new Guitar(null, 0, null, null, null, null, null, 12);
+		Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec(null, null, null, null, null), 12);
 		String[] serialNumbers = { "GPC12PA4" };
 		this.searchTester(searchGuitar, serialNumbers);
 }
@@ -209,7 +208,9 @@ public class InventoryTest {
 	 */
 	@Test
 	public void test_search_notFound() {
-		Guitar searchGuitar = new Guitar(null, 0, "LEXUS", null, null, null, null, null);
+		//Guitar searchGuitar = new Guitar(null, 0, "LEXUS", null, null, null, null, null);
+		Guitar searchGuitar = new Guitar(null, 0, new GuitarSpec( GuitarManufacturer.LEXUS, null, null, null, null), null);
+
 		Assert.assertNull("Should not have found any guitars", this.guitarInventory.search(searchGuitar));
 	}
 	

@@ -9,7 +9,8 @@ public enum GuitarManufacturer {
 	GIBSON("Gibson"),
 	OLSON("Olson"),
 	PRS("PRS"),
-	RYAN("Ryan");
+	RYAN("Ryan"),
+	LEXUS("Lexus");
 	
 	private String displayName;
 	

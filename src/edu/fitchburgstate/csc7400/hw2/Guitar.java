@@ -13,7 +13,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Rick's music store
  * 
  * @author Priya
- *
+ * @author Parker
  */
 public class Guitar implements GuitarInterface {
 

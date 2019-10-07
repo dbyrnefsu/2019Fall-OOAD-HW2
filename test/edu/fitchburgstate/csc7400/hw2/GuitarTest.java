@@ -1,5 +1,6 @@
 /**
  * Class: Object-Oriented Design and Analysis
+
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
@@ -8,6 +9,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

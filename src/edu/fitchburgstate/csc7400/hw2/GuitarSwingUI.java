@@ -1,5 +1,6 @@
 /**
- * Class: Object-Oriented Design and Analysis
+ 
+* Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
@@ -9,6 +10,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
 import java.awt.Container;
+
 import java.awt.EventQueue;
 import java.awt.GridLayout;
 

@@ -1,5 +1,6 @@
 /**
  * Class: Object-Oriented Design and Analysis
+
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
@@ -8,6 +9,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
 import java.util.MissingResourceException;
+
 import java.util.ResourceBundle;
 
 /**

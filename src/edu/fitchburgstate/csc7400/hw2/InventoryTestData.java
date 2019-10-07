@@ -1,9 +1,10 @@
 /**
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
+ * 
  * Assignment: HW 2
  * 
- * Date: 2017-09-20
+ * Date: 2019-10-06
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -25,6 +26,7 @@ public class InventoryTestData {
 			"Olson", // 4
 			"PRS", // 5
 			"Ryan" // 6
+		
 	};
 
 	/**

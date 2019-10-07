@@ -106,11 +106,11 @@ public class Inventory {
 	 * @return the found guitar, may be null
 	 */
 	public Guitar search(Guitar searchGuitar) {
-		String manufacturer = searchGuitar.getManufacturer();
-		String model = searchGuitar.getModel();
-		String type = searchGuitar.getType();
-		String backWood = searchGuitar.getBackWood();
-		String topWood = searchGuitar.getTopWood();
+	Manufacturer manufacturer = searchGuitar.getManufacturer();
+		string model = searchGuitar.getModel();
+		Type type = searchGuitar.getType();
+		Woodmodel backWood = searchGuitar.getBackWood();
+		Woodmodel topWood = searchGuitar.getTopWood();
 		int numString = searchGuitar.getNumberOfStrings();
 
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
@@ -134,6 +134,13 @@ public class Inventory {
 		}
 		return null;
 	}
-
-	private List<Guitar> guitars; // guitar inventory
+public list search(Guitarspec search guit) {
+	List<Guitar>matchedGuitars=new
+			Linked list<Guitar)i.next();
+			if(guitar.getspec().matchedGuitar(searchGuitar)) {
+				matchedGuitars.add(guitar);
+				
+			}
+}
+	private List<Guitar>guitars; // guitar inventory
 }

@@ -1,5 +1,6 @@
 /**
  * Class: Object-Oriented Design and Analysis
+
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
@@ -12,10 +13,10 @@ package edu.fitchburgstate.csc7400.hw2;
  * Guitar contains the information needed to keep track of a type of guitar from
  * Rick's music store
  * 
- * @author HeadFirstOODA
+ * @author kboppana
  *
  */
-public class Guitar {
+public class Guitar implements guitarinterface {
 
 	/**
 	 * Full constructor
@@ -31,21 +32,20 @@ public class Guitar {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Type type, 
+			woodmodel backWood,
+			woodmodel topWood,
 			Integer numStrings) {
+	
+	
 		this.serialNumber = serialNumber;
 		this.price = price;
-		this.manufacturer = manufacturer;
-		this.model = model;
-		this.type = type;
-		this.backWood = backWood;
-		this.topWood = topWood;
-		if (numStrings == null) this.numberOfStrings = 0;
-		else this.numberOfStrings = numStrings;
+	if(numstrings==null)this.numberofstrings=0;
+		else this.numberOfStrings=numstrings;
+		this.guitarspec=new guitarspec(manufacturer,model,type,backwood,topwood,price);
+		
 	}
 
 	/**
@@ -72,7 +72,7 @@ public class Guitar {
 	/**
 	 * Returns the name of the manufacturer
 	 */
-	public String getManufacturer() {
+	public Manufacturer getManufacturer() {
 		return this.manufacturer;
 	}
 
@@ -87,21 +87,21 @@ public class Guitar {
 	 * Returns the guitar type
 	 * @return
 	 */
-	public String getType() {
+	public type getType() {
 		return type;
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public String getBackWood() {
+	public wood getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public String getTopWood() {
+	public wood getTopWood() {
 		return topWood;
 	}
 	
@@ -127,7 +127,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private manufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,17 +137,17 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private type type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private wood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private wood topWood;
 
 	/**
 	 * Rick's price for the guitar

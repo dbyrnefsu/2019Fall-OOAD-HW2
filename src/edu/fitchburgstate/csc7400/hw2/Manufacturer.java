@@ -13,7 +13,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Manufacturer contains enum Manufacturer
  * 
  * @author Priya
- *
+ * @author Parker
  */
 
 public enum Manufacturer {

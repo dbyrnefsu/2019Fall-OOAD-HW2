@@ -29,8 +29,7 @@ public class Inventory {
 	/**
 	 * Adds a guitar to the inventory
 	 * 
-	 * @param guitar
-	 *            a fully qualified guitar
+	 * @param guitar a fully qualified guitar
 	 */
 	public void addGuitar(Guitar guitar) {
 		guitars.add(guitar);
@@ -39,22 +38,14 @@ public class Inventory {
 	/**
 	 * Adds a new guitar to the inventory given all the guitars information.
 	 * 
-	 * @param serialNumber
-	 *            the guitars manufacturer serial number
-	 * @param price
-	 *            the customer price
-	 * @param manufacturer
-	 *            the guitar's manufacturer
-	 * @param model
-	 *            the manufacturer model id
-	 * @param type
-	 *            type of guitar
-	 * @param topWood
-	 *            wood used in front of guitar
-	 * @param backWood
-	 *            wood used in back of guitar
-	 * @param numStrings
-	 *            the number of strings
+	 * @param serialNumber the guitars manufacturer serial number
+	 * @param price        the customer price
+	 * @param manufacturer the guitar's manufacturer
+	 * @param model        the manufacturer model id
+	 * @param type         type of guitar
+	 * @param topWood      wood used in front of guitar
+	 * @param backWood     wood used in back of guitar
+	 * @param numStrings   the number of strings
 	 * 
 	 * @precondition serialNumber is not empty
 	 * @precondition price > 0
@@ -75,7 +66,7 @@ public class Inventory {
 		assert topWood != null;
 		assert backWood != null;
 		assert numStrings >= 0;
-		
+
 		Guitar guitar = new Guitar(serialNumber, price, manufacturer, type, model, topWood, backWood, numStrings);
 		this.addGuitar(guitar);
 	}
@@ -83,8 +74,7 @@ public class Inventory {
 	/**
 	 * Finds and returns a guitar that has the provided serial number
 	 * 
-	 * @param serialNumber
-	 *            serial number of guitar
+	 * @param serialNumber serial number of guitar
 	 * @return the guitar with the correct serial number, or null if not found
 	 */
 	public Guitar getGuitar(String serialNumber) {
@@ -98,11 +88,10 @@ public class Inventory {
 	}
 
 	/**
-	 * Finds and returns a guitar that matches a provided guitar. Any null in
-	 * spec are consider wildcards.
+	 * Finds and returns a guitar that matches a provided guitar. Any null in spec
+	 * are consider wildcards.
 	 * 
-	 * @param searchGuitar
-	 *            the guitar with qualities we want to match
+	 * @param searchGuitar the guitar with qualities we want to match
 	 * @return the found guitar, may be null
 	 */
 	public Guitar search(Guitar searchGuitar) {
@@ -133,6 +122,22 @@ public class Inventory {
 			return guitar;
 		}
 		return null;
+	}
+
+	public List<Guitar> search(GuitarSpec searchSpec) {
+		List<Guitar> matchedGuitars = new LinkedList<Guitar>();
+		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
+			Guitar guitar = (Guitar) i.next();
+			
+			if (guitar.matches(searchSpec))
+				matchedGuitars.add(guitar);
+		}
+		
+		if (matchedGuitars.size() > 0)
+			return matchedGuitars;
+
+		else
+			return null;
 	}
 
 	private List<Guitar> guitars; // guitar inventory

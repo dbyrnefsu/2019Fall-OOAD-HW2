@@ -94,14 +94,14 @@ public class Guitar implements guitarinterface {
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public wood getBackWood() {
+	public woodmodel getBackWood() {
 		return backWood;
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public wood getTopWood() {
+	public woodmodel getTopWood() {
 		return topWood;
 	}
 	
@@ -142,12 +142,12 @@ public class Guitar implements guitarinterface {
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private wood backWood;
+	private woodmodel backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private wood topWood;
+	private woodmodel topWood;
 
 	/**
 	 * Rick's price for the guitar

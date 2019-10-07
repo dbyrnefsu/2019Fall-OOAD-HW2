@@ -3,7 +3,8 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2018-09-03
+ * Students: Abha Kumari, Divya Mallepally, Vineela Venula 
+ * Date: 2019-10-06
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -42,8 +43,13 @@ public class Guitar extends GuitarSpec {
 		this.price = price;
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;	
-	}	
-
+	}
+	
+	/**
+	 * Verifies if guitors are equal
+	 * @param guitar is the guitar
+	 * @return if equals returns true else false
+	 */	
 	public boolean equals(Guitar guitar) {
 		if(!this.serialNumber.equals(guitar.serialNumber))
 			return false;
@@ -64,6 +70,11 @@ public class Guitar extends GuitarSpec {
 		return true;
 	}
 
+	/**	
+	 * Verifies guitar specs matches with another guitar specs
+	 * @param guitarSpec spec of guitar
+	 * * @return if spcs matches returns true else false
+	 */
 	public boolean matches(GuitarSpec guitarSpec) {
 		if (guitarSpec.getGuitarManufacturer() != null && super.getGuitarManufacturer() != guitarSpec.getGuitarManufacturer())
 			return false;
@@ -94,26 +105,45 @@ public class Guitar extends GuitarSpec {
 		return price;
 	}
 
+	/**
+	 * Sets the store price of the guitar
+	 */
 	public void setPrice(double newPrice) {
 		this.price = newPrice;
 	}
 
+	/**
+	 * Returns the manufacturer model
+	 */
 	public String getModel() {
 		return getGuitarModel();
 	}
 	
+	/**
+	 * Returns the name of the manufacturer
+	 */
 	public Manufacturer getGuitarManufacturer() {		
 		return super.getGuitarManufacturer();
 	}
 
+	/**
+	 * Returns the guitar type
+	 * @return electric or acoustic
+	 */
 	public Type getGuitarType() {
 		return super.getGuitarType();
 	}
-	
+
+	/**
+	 * Returns the type of wood used in the face
+	 */
 	public Wood getGuitarTopWood() {
 		return super.getGuitarTopWood();
 	}
 
+	/**
+	 * Returns the type of wood used in the body
+	 */
 	public Wood getGuitarBackWood() {
 		return super.getGuitarBackWood();
 	}

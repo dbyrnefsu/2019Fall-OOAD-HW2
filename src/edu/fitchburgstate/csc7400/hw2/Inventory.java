@@ -3,8 +3,10 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2017-09-20
+ * Students: Abha Kumari, Divya Mallepally, Vineela Venula 
+ * Date: 2019-10-06
  */
+ 
 package edu.fitchburgstate.csc7400.hw2;
 
 import java.util.Iterator;
@@ -124,6 +126,13 @@ public class Inventory {
 		return null;
 	}
 
+	/**
+	 * Finds and returns list guitars that matches a provided guitar spec. Any null in spec
+	 * are consider wildcards.
+	 * 
+	 * @param searchSpec the guitar with qualities we want to match spec
+	 * @return the list of guitars found, may be null
+	 */
 	public List<Guitar> search(GuitarSpec searchSpec) {
 		List<Guitar> matchedGuitars = new LinkedList<Guitar>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {

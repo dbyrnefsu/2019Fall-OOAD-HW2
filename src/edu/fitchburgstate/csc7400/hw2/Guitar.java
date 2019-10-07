@@ -1,9 +1,27 @@
 package edu.fitchburgstate.csc7400.hw2;
-
+/**
+ * Class        : Object-Oriented Analysis and Design
+ * Professor    : Orlando Montalvo
+ * Assignment   : HW-2
+ * Date         : 10-06-2019
+ * @author      : Sravani Veerapureddy and Yamini Gopisetti
+ */
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public  class Guitar implements GuitarInterface{
+	/**
+	 * Full constructor
+	 * 
+	 * @param serialNumber manufacturer serial number
+	 * @param price store price
+	 * @param manufacturer the guitar's manufacturer
+	 * @param type guitar type (electric/acoustic)
+	 * @param model the manufacturers model
+	 * @param backWood the wood used for the guitar body
+	 * @param topWood the wood used for the guitar's face
+	 * @param numString the number of strings for this guitar
+	 */
 	
 	private String serialNumber;
 	private double price;
@@ -41,7 +59,9 @@ public  class Guitar implements GuitarInterface{
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
 	}
-
+        /**
+	 * Returns the manufacturer serial number
+	 */
 	public Manufacturer getManufacturer() {
 		return manufacturer;
 	}

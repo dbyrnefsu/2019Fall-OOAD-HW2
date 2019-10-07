@@ -13,7 +13,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Wood contains enum Wood
  * 
  * @author Priya
- *
+ * @author Parker
  */
 public enum Wood {
 	Adirondack,

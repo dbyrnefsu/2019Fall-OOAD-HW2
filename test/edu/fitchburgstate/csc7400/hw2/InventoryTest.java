@@ -3,7 +3,8 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2017-09-20
+ * Students: Abha Kumari, Divya Mallepally, Vineela Venula 
+ * Date: 2019-10-06
  */
 package edu.fitchburgstate.csc7400.hw2;
 

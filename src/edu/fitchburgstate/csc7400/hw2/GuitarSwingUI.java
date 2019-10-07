@@ -2,8 +2,9 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
- * Date: 2017-09-20
+ * Creates user interface for Guitar program
+ * @authors Komal and Zi Lin(@01411726 and @01375707)
+ * @since 10-03-2019
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -37,6 +38,8 @@ import javax.swing.event.ChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
 import java.beans.PropertyChangeEvent;
@@ -294,20 +297,40 @@ public class GuitarSwingUI {
 				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, backWood, topWood, model);
+				List<Guitar> matching = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
 				if (matching == null) {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					// get another matching list of Guitar when using price
+					List<Guitar> matchingWithPrice = new LinkedList<Guitar>();
+					for(Iterator<Guitar> it = matching.iterator(); it.hasNext();) {
+						Guitar g = it.next();
+						double price = g.getPrice();
+						if(price >= priceLow && price <= priceHigh) {
+							matchingWithPrice.add(g);
+						}
+					}
+								
+					if (matchingWithPrice.size() == 0) {
+						setNotFound();
+					}
+					else {
+						setFound(matchingWithPrice.size());
+						for(Iterator<Guitar> it = matchingWithPrice.iterator(); it.hasNext();) {
+								matchingGuitars.addElement(it.next().toString());
+							
+						}			
+					}
+
 				}
+				
 			}
 		});
 		questionPane.add(btnSearch); //$NON-NLS-1$
@@ -335,7 +358,6 @@ public class GuitarSwingUI {
 		this.matchingGuitars = new DefaultListModel<String>();
 		this.list = new JList<String>(this.matchingGuitars);
 		matchingGuitars.addElement("None yet!");
-		
 		windowContentPane.add(list);
 		
 		setGreeting();

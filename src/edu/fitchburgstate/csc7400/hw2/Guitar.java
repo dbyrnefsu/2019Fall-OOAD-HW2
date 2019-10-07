@@ -1,41 +1,35 @@
-/**
- * Class: Object-Oriented Design and Analysis
- * Professor: Orlando Montalvo
- * Assignment: HW 2
- * 
- * Date: 2018-09-03
- */
-
 package edu.fitchburgstate.csc7400.hw2;
 
-/**
- * Guitar contains the information needed to keep track of a type of guitar from
- * Rick's music store
- * 
- * @author HeadFirstOODA
- *
- */
-public class Guitar {
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-	/**
-	 * Full constructor
-	 * 
-	 * @param serialNumber manufacturer serial number
-	 * @param price store price
-	 * @param manufacturer the guitar's manufacturer
-	 * @param model the manufacturers model
-	 * @param type guitar type (electric/acoustic)
-	 * @param backWood the wood used for the guitar body
-	 * @param topWood the wood used for the guitar's face
-	 * @param numString the number of strings for this guitar
-	 */
+public  class Guitar implements GuitarInterface{
+	
+	private String serialNumber;
+	private double price;
+	public Manufacturer manufacturer;
+	public Type type;
+	public Wood topWood;
+	public Wood backWood;
+	public String model;
+	public int numberOfStrings;
+	
+	
+	public int getNumberOfStrings() {
+		return numberOfStrings;
+	}
+
+	public void setNumberOfStrings(int numberOfStrings) {
+		this.numberOfStrings = numberOfStrings;
+	}
+
 	public Guitar(String serialNumber, 
 			double price, 
-			String manufacturer, 
+			Manufacturer manufacturer, 
 			String model, 
-			String type, 
-			String backWood,
-			String topWood,
+			Type type, 
+			Wood backWood,
+			Wood topWood,
 			Integer numStrings) {
 		this.serialNumber = serialNumber;
 		this.price = price;
@@ -48,119 +42,78 @@ public class Guitar {
 		else this.numberOfStrings = numStrings;
 	}
 
-	/**
-	 * Returns the manufacturer serial number
-	 */
-	public String getSerialNumber() {
-		return serialNumber;
+	public Manufacturer getManufacturer() {
+		return manufacturer;
 	}
-
-	/**
-	 * Returns store price of guitar
-	 */
-	public double getPrice() {
-		return price;
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
 	}
-
-	/**
-	 * Sets the store price of the guitar
-	 */
-	public void setPrice(double newPrice) {
-		this.price = newPrice;
+	public Type getType() {
+		return type;
 	}
-
-	/**
-	 * Returns the name of the manufacturer
-	 */
-	public String getManufacturer() {
-		return this.manufacturer;
+	public void setType(Type type) {
+		this.type = type;
 	}
-
-	/**
-	 * Returns the manufacturer model
-	 */
+	public Wood getTopWood() {
+		return topWood;
+	}
+	public void setTopWood(Wood topWood) {
+		this.topWood = topWood;
+	}
+	public Wood getBackWood() {
+		return backWood;
+	}
+	public void setBackWood(Wood backWood) {
+		this.backWood = backWood;
+	}
+	@Override
 	public String getModel() {
 		return model;
 	}
-
-	/**
-	 * Returns the guitar type
-	 * @return
-	 */
-	public String getType() {
-		return type;
+	public void setModel(String model) {
+		this.model=model;
 	}
-
-	/**
-	 * Returns the type of wood used in the body
-	 */
-	public String getBackWood() {
-		return backWood;
+	public String getSerialNumber() {
+		return serialNumber;
 	}
-
-	/**
-	 * Returns the type of wood used in the face
-	 */
-	public String getTopWood() {
-		return topWood;
+	public void setSerialNumber(String serialNumber) {
+		this.serialNumber = serialNumber;
+	}
+	public double getPrice() {
+		return price;
+	}
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
-	/**
-	 * Returns the number of string for this guitar
-	 */
-	public int getNumberOfStrings() {
-		return numberOfStrings;
-	}
+	@Override
+    public boolean equals(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+        if (obj == null || obj.getClass() != this.getClass()) {
+            return false;
+        }
 
-	/**
-	 * Turn object into a readable string
-	 */
-	public String toString() {
-		return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
-	}
-
-	/**
-	 * The guitars manufacturer serial number
-	 */
-	private String serialNumber;
-
-	/**
-	 * The name of the manufacturer
-	 */
-	private String manufacturer;
-
-	/**
-	 * The manufacturer model number
-	 */
-	private String model;
-
-	/**
-	 * The guitar type (electric/acoustic)
-	 */
-	private String type;
-
-	/**
-	 * The wood used for the back of the guitar
-	 */
-	private String backWood;
-
-	/**
-	 * The wood used for the face of the guitar
-	 */
-	private String topWood;
-
-	/**
-	 * Rick's price for the guitar
-	 */
-	private double price;
+        Guitar guest = (Guitar) obj;
+        return this.backWood == guest.backWood
+                && (this.topWood == guest.topWood )
+                   && (model != null && this.model.equals(guest.getModel()))
+                && (this.type == guest.type )
+                     && this.manufacturer==guest.manufacturer 
+                     && this.price==guest.getPrice() && this.serialNumber.equalsIgnoreCase(guest.getSerialNumber());
+    }
 	
-	/**
-	 * Guitars number of strings
-	 */
-	private int numberOfStrings;
-
-	/**
-	 * Formatting string for toString()
-	 */
-	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
+	   public boolean matches(Object obj) {
+	    	 Guitar guest = (Guitar) obj;
+	    	 Pattern p = Pattern.compile(guest.toString());
+	    	 Matcher m = p.matcher(this.toString());
+	    	return m.matches();
+	   }	
+	   
+	   public String toString() {
+			return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
+		}
+	   
+	   private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
 }

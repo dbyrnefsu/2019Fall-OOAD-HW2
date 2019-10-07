@@ -7,6 +7,7 @@
  */
 package edu.fitchburgstate.csc7400.hw2;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -65,8 +66,8 @@ public class Inventory {
 	 * @precondition backWood != null
 	 * @precondition numStrings >= 6 or null
 	 */
-	public void addGuitar(String serialNumber, double price, String manufacturer, String type, String model,
-			String topWood, String backWood, Integer numStrings) {
+	public void addGuitar(String serialNumber, double price, Manufacturer manufacturer, Type type, String model,
+			Wood topWood, Wood backWood, Integer numStrings) {
 		assert serialNumber != null;
 		assert price > 0;
 		assert manufacturer != null;
@@ -76,7 +77,7 @@ public class Inventory {
 		assert backWood != null;
 		assert numStrings >= 0;
 		
-		Guitar guitar = new Guitar(serialNumber, price, manufacturer, type, model, topWood, backWood, numStrings);
+		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model, type, topWood, backWood, numStrings);
 		this.addGuitar(guitar);
 	}
 
@@ -105,34 +106,39 @@ public class Inventory {
 	 *            the guitar with qualities we want to match
 	 * @return the found guitar, may be null
 	 */
-	public Guitar search(Guitar searchGuitar) {
-		String manufacturer = searchGuitar.getManufacturer();
+	public List<Guitar> search(Guitar searchGuitar) {
+		Manufacturer manufacturer = searchGuitar.getManufacturer();
 		String model = searchGuitar.getModel();
-		String type = searchGuitar.getType();
-		String backWood = searchGuitar.getBackWood();
-		String topWood = searchGuitar.getTopWood();
+		Type type = searchGuitar.getType();
+		Wood backWood = searchGuitar.getBackWood();
+		Wood topWood = searchGuitar.getTopWood();
 		int numString = searchGuitar.getNumberOfStrings();
+		double maxPrice = searchGuitar.getPrice();
 
+		List<Guitar> resGuitar = new ArrayList<Guitar>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 			// Ignore serial number since that's unique
 			// Ignore price since that's unique
-			if ((manufacturer != null) && (!manufacturer.equals(""))
-					&& (!manufacturer.equalsIgnoreCase(guitar.getManufacturer())))
+			if(maxPrice < guitar.getPrice())
+				continue;
+			if ((!manufacturer.equals(Manufacturer.Any)) && (manufacturer != null) && (!manufacturer.equals(""))
+					&& (!manufacturer.name().equalsIgnoreCase(guitar.getManufacturer().name())))
 				continue;
 			if ((model != null) && (!model.equals("")) && (!model.equalsIgnoreCase(guitar.getModel())))
 				continue;
-			if ((type != null) && (!type.equals("")) && (!type.equalsIgnoreCase(guitar.getType())))
+			if (!type.equals(Type.Any) && (type != null) && (!type.equals("")) && (!type.name().equalsIgnoreCase(guitar.getType().name())))
 				continue;
-			if ((backWood != null) && (!backWood.equals("")) && (!backWood.equalsIgnoreCase(guitar.getBackWood())))
+			if (!backWood.equals(Wood.Any) && (backWood != null) && (!backWood.equals("")) && (!backWood.name().equalsIgnoreCase(guitar.getBackWood().name())))
 				continue;
-			if ((topWood != null) && (!topWood.equals("")) && (!topWood.equalsIgnoreCase(guitar.getTopWood())))
+			if (!topWood.equals(Wood.Any) && (topWood != null) && (!topWood.equals("")) && (!topWood.name().equalsIgnoreCase(guitar.getTopWood().name())))
 				continue;
 			if (numString != 0 && numString != guitar.getNumberOfStrings())
 				continue;
-			return guitar;
+			resGuitar.add(guitar);
+			//return guitar;
 		}
-		return null;
+		return resGuitar;
 	}
 
 	private List<Guitar> guitars; // guitar inventory

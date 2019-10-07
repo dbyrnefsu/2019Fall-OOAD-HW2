@@ -96,7 +96,7 @@ public class GuitarSwingUI {
 	 */
 	private String[] createLookupList(String[] list) {
 		List<String> choices = new ArrayList<String>();
-		choices.add(WILD_CARD);
+		//choices.add(WILD_CARD);
 		choices.addAll(Arrays.asList(list));
 		String[] ret = new String[choices.size()];
 		return choices.toArray(ret);
@@ -109,17 +109,18 @@ public class GuitarSwingUI {
 	 * @return the chosen value or null if wild card was chosen
 	 */
 	private String getChosen(String chosen) {
-		if (WILD_CARD.equals(chosen)) return null;
-		else return chosen;
+//		if (WILD_CARD.equals(chosen)) return null;
+//		else return chosen;
+		return chosen;
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		String[] manufacturers = createLookupList(InventoryTestData.MANUFACTURERS);
-		String[] types = createLookupList(InventoryTestData.TYPES);
-		String[] woods = createLookupList(InventoryTestData.WOODS);
+		String[] manufacturers = createLookupList(Arrays.stream(Manufacturer.values()).map(Manufacturer::name).toArray(String[]::new));
+		String[] types = createLookupList(Arrays.stream(Type.values()).map(Type::name).toArray(String[]::new));
+		String[] woods = createLookupList(Arrays.stream(Wood.values()).map(Wood::name).toArray(String[]::new));
 		
 		frmRicksGuitars = new JFrame();
 		frmRicksGuitars.setTitle(Messages.getString("GuitarRun.Title")); //$NON-NLS-1$
@@ -288,25 +289,26 @@ public class GuitarSwingUI {
 		btnSearch.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				String manufacturer = getChosen((String) manufacturerComboBox.getSelectedItem());
-				String type = getChosen((String) typeComboBox.getSelectedItem());
-				String topWood = getChosen((String) topWoodComboBox.getSelectedItem());
-				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
+				Manufacturer manufacturer = Manufacturer.valueOf(getChosen((String) manufacturerComboBox.getSelectedItem()));
+				Type type = Type.valueOf(getChosen((String) typeComboBox.getSelectedItem()));
+				Wood topWood = Wood.valueOf(getChosen((String) topWoodComboBox.getSelectedItem()));
+				Wood backWood = Wood.valueOf(getChosen((String) backWoodComboBox.getSelectedItem()));
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
+				double priceLow = (double) lowSpinner.getValue();
+				double priceHigh = (double) highSpinner.getValue();
 				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+				Guitar searchGuitar = new Guitar(null, priceHigh, manufacturer, model, type, topWood, backWood, 0);
+				List<Guitar> matching = inventory.search(searchGuitar);
 
 				matchingGuitars.clear();
 				if (matching == null) {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					setFound(Integer.valueOf((matching.size())));
+					matching.forEach(m -> matchingGuitars.addElement(m.toString()));
+					//matchingGuitars.addElement(matching.toString());
 				}
 			}
 		});

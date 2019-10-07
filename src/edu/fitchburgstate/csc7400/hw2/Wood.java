@@ -1,6 +1,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 
 public enum Wood {
+	Any("Any"),
 	Adirondack("Adirondack"), 
 	Alder("Alder"), 
 	Brazilian_Rosewood("Brazilian Rosewood"), 

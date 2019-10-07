@@ -167,7 +167,7 @@ public class Guitar extends GuitarSpec {
 
 	/**
 	 * Returns the guitar type
-	 * @return
+	 * @return electric or acoustic
 	 */
 	public String getType() {
 		if(getGuitarType() == null)

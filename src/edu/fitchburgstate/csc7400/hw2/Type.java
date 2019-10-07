@@ -13,7 +13,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Type contains enum type
  * 
  * @author Priya
- *
+ * @author Parker
  */
 public enum Type {
 	Acoustic,

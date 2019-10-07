@@ -1,16 +1,38 @@
 package edu.fitchburgstate.csc7400.hw2;
-
+/**
+ * Class        : Object-Oriented Analysis and Design
+ * Professor    : Orlando Montalvo
+ * Assignment   : HW-2
+ * Date         : 10-06-2019
+ * @author      : Sravani Veerapureddy and Yamini Gopisetti
+ */
+ 
+ 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class GuitarSpec implements GuitarInterface{
 
-	
+	/**
+	 * The name of the manufacturer in a guitar specification
+	 */
 
 	public Manufacturer manufacturer;
+	/**
+	 * The guitar type (electric/acoustic) in a guitar specification
+	 */
 	public Type type;
+	/**
+	 * The wood used for the face of the guitar in a guitar specification
+	 */
 	public Wood topWood;
+	/**
+	 * The wood used for the back of the guitar in a guitar specification
+	 */
 	public Wood backWood;
+	/**
+	 * The manufacturer model number in a guitar specification
+	 */
 	public String model;
 	
 	

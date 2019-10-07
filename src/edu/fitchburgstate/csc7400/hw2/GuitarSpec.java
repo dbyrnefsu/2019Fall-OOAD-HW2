@@ -1,7 +1,15 @@
+/**
+ * Class: Object-Oriented Design and Analysis
+ * Professor: Orlando Montalvo
+ * Assignment: HW 2
+ * Student: Xia Jin, Akhila Lolam
+ * Date: 2019-10-03
+ */
+
 package edu.fitchburgstate.csc7400.hw2;
 
 /**
- * GuitarSpec contains information of a specification for a set of values
+ * GuitarSpec contains information of a specification
  * for guitars based on the following values:
  * - manufacturer
  * - type
@@ -10,17 +18,17 @@ package edu.fitchburgstate.csc7400.hw2;
  * - model 
  * 
  * @author xia.jin
- *
  */
 
 public class GuitarSpec implements GuitarInterface {
 	/**
 	 * Full constructor
-	 * @param manufacturer
-	 * @param type
-	 * @param topWood
-	 * @param backWood
-	 * @param model
+	 * Takes enum type for manufacturer, type, backWood, and topWood
+	 * @param manufacturer the guitar's manufacturer
+	 * @param type guitar type 
+	 * @param backWood the wood used for the guitar body
+	 * @param topWood the wood used for the guitar's face
+	 * @param model the manufacturers model
 	 */
 	public GuitarSpec(Manufacturer manufacturer,
 			Type type,
@@ -33,13 +41,15 @@ public class GuitarSpec implements GuitarInterface {
 		this.topWood = topWood;
 		this.model = model;
 	}
+	
 	/**
-	 * Constructor, use string input for all values
-	 * @param manufacturer
-	 * @param type
-	 * @param topWood
-	 * @param backWood
-	 * @param model
+	 * Constructor
+	 * Takes String type for manufacturer, type, backWood, and topWood
+	 * @param manufacturer the guitar's manufacturer
+	 * @param type guitar type 
+	 * @param backWood the wood used for the guitar body
+	 * @param topWood the wood used for the guitar's face
+	 * @param model the manufacturers model
 	 */
 	public GuitarSpec(String manufacturer, String type, String backWood, String topWood, String model) {
 		if(manufacturer!=null) {
@@ -59,8 +69,9 @@ public class GuitarSpec implements GuitarInterface {
 		}
 		
 	}
+	
 	/**
-	 * Returns the name of the manufacturer in a guitar specification
+	 * Returns the name of the manufacturer
 	 */ 
 	@Override
 	public Manufacturer getManufacturer() {
@@ -68,7 +79,7 @@ public class GuitarSpec implements GuitarInterface {
 	}
 	
 	/** 
-	 * Returns the guitar type in a guitar specification
+	 * Returns the guitar type
 	 */
 	@Override
 	public Type getType() {
@@ -76,7 +87,7 @@ public class GuitarSpec implements GuitarInterface {
 	}
 
 	/**
-	 *  Returns the type of the wood used in body in a guitar specification
+	 *  Returns the type of the wood used in the body 
 	 */
 	@Override
 	public Wood getBackWood() {
@@ -84,7 +95,7 @@ public class GuitarSpec implements GuitarInterface {
 	}
 	
 	/**
-	 *  Returns the type of the wood used in the face in a guitar specification
+	 *  Returns the type of the wood used in the face
 	 */
 	@Override
 	public Wood getTopWood() {
@@ -92,43 +103,58 @@ public class GuitarSpec implements GuitarInterface {
 	}
 
 	/**
-	 *  Returns the model in a guitar specification
+	 *  Returns the model
 	 */
 	@Override
 	public String getModel() {
 		return model;
 	}
 	
-	// Sets the manufacturer in a guitar specification
+	/** 
+	 * Sets the manufacturer in a guitar specification
+	 * @param manufacturer
+	 */
 	public void setManufacturer(Manufacturer manufacturer) {
 		this.manufacturer = manufacturer;		
 	}
 	
-	// Sets type in a guitar specification
+	/**
+	 * Sets type in a guitar specification
+	 * @param type
+	 */
 	public void setType(Type type) {
 		this.type = type;
 	}
 
-	// Sets top wood in a guitar specification
+	/**
+	 * Sets top wood in a guitar specification
+	 * @param wood
+	 */
 	public void setTopWood(Wood wood) {
 		this.topWood = wood;
 	}
 
-	// Sets back wood in a guitar specification
+	/**
+	 * Sets back wood in a guitar specification
+	 * @param wood
+	 */
 	public void setBackWood(Wood wood) {
 		this.backWood = wood;
 	}
 
-	// Sets model in a guitar specification
+	/**
+	 * Sets model in a guitar specification
+	 * @param model
+	 */
 	public void setModel(String model) {
 		this.model = model;
 	}
 
 	/**
-	 * Finds if the guitar spec equals to another spec
-	 * Check if every value equals to the value in another spec
-	 * @param otherSpec
-	 * @return true if equals, false if not equal
+	 * Finds if the guitar specification equals to another guitar specification
+	 * Check if every value equals to the value in another specification
+	 * @param otherSpec a guitar specification
+	 * @return returns true if equals, false if not equal
 	 */
 	public boolean equals(GuitarSpec otherSpec) {
 		if(this.manufacturer != otherSpec.manufacturer) 
@@ -145,11 +171,16 @@ public class GuitarSpec implements GuitarInterface {
 	}
 	
 	/**
-	 * Finds if the guitar spec matches to another spec
-	 * if value is specified, check if equals to the value in another spec
-	 * if value is unspecified, then no need to check
-	 * @param otherSpec
-	 * @return returns true if matches, false if does not match
+	 * Finds if the guitar specification matches to another guitar specification,
+	 * Compares values in the guitar specification and another guitar specification,
+	 * if a value in another guitar specification is specified, 
+	 * check if it equals to the value in the guitar specification;
+	 * if a value in another guitar specification is unspecified, 
+	 * treat as wildcard and will not compare.
+	 * @return returns true if every specified value in another guitar specification equals to 
+	 * the value in the guitar specification; 
+	 * returns false if any specified value in another guitar specification does not equal to 
+	 * the value in the guitar specification.
 	 */
 	public boolean matches(GuitarSpec otherSpec) {
 		if(otherSpec.manufacturer != null && this.manufacturer != otherSpec.manufacturer) 
@@ -163,38 +194,37 @@ public class GuitarSpec implements GuitarInterface {
 		else if (otherSpec.model != null && !otherSpec.model.toUpperCase().equals(this.model.toUpperCase()))
 			return false;
 		return true;
-
 	}
 	
 	/**
-	 * Turns a guitar object into a readable string
+	 * Turns a GuitarSpec object into a readable string
 	 */
 	public String toString() {
-		return String.format(toStringFormat, manufacturer, type, backWood, topWood, model );
+		return String.format(toStringFormat, manufacturer, type, backWood, topWood, model);
 	}
 
 	/**
-	 * The name of the manufacturer in a guitar specification
+	 * The name of the manufacturer 
 	 */
 	private Manufacturer manufacturer;
 
 	/**
-	 * The manufacturer model number in a guitar specification
+	 * The manufacturer model number 
 	 */
 	private String model;
 
 	/**
-	 * The guitar type (electric/acoustic) in a guitar specification
+	 * The guitar type (electric/acoustic) 
 	 */
 	private Type type;
 
 	/**
-	 * The wood used for the back of the guitar in a guitar specification
+	 * The wood used for the back of the guitar 
 	 */
 	private Wood backWood;
 
 	/**
-	 * The wood used for the face of the guitar in a guitar specification
+	 * The wood used for the face of the guitar 
 	 */
 	private Wood topWood;
 

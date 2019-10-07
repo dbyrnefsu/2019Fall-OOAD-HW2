@@ -1,20 +1,45 @@
+/**
+ * Class: Object-Oriented Design and Analysis
+ * Professor: Orlando Montalvo
+ * Assignment: HW 2
+ * Student: Xia Jin, Akhila Lolam
+ * Date: 2019-10-03
+ */
+
 package edu.fitchburgstate.csc7400.hw2;
+
+/**
+ * GuitarInterface 
+ * 
+ * @author xia.jin
+ *
+ */
 
 public interface GuitarInterface {
 
-	//return the guitar's manufacturer
+	/**
+	 * Returns the name of the manufacturer
+	 */
 	public Manufacturer getManufacturer();
 	
-	//return the guitar's type
+	/**
+	 * Returns the guitar type
+	 */
 	public Type getType();
 	
-	//return the guitar's top wood
+	/**
+	 * Returns the type of wood used in the face
+	 */
 	public Wood getTopWood();
 	
-	//return the guitar's back wood
+	/**
+	 * Returns the type of wood used in the body
+	 */
 	public Wood getBackWood();
 	
-	//return the guitar's model
+	/**
+	 * Returns the manufacturer model
+	 */
 	public String getModel();
 	
 }

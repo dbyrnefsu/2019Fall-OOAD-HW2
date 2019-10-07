@@ -297,7 +297,7 @@ public class GuitarSwingUI {
 				double priceLow = (double) lowSpinner.getValue();
 				double priceHigh = (double) highSpinner.getValue();
 				
-				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, model, priceLow,priceHigh,topWood, backWood);
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, model, type,topWood, backWood, priceLow, priceHigh);
 				List<Guitar> matching = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
@@ -305,7 +305,7 @@ public class GuitarSwingUI {
 					setNotFound();
 				}
 				else {
-					setFound(matching.size);
+					setFound(matching.size());
 					matchingGuitars.addElement(matching.toString());
 				}
 			}

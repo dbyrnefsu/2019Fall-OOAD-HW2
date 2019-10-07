@@ -24,7 +24,8 @@ public class InventoryTestData {
 			"Gibson", // 3
 			"Olson", // 4
 			"PRS", // 5
-			"Ryan" // 6
+			"Ryan", // 6
+			"Lexus" // 7
 	};
 
 	/**
@@ -38,10 +39,10 @@ public class InventoryTestData {
 	public static String[] WOODS = {
 		"Adirondack", // 0
 		"Alder", // 1
-		"Brazilian Rosewood", // 2 
+		"Brazilian_Rosewood", // 2 
 		"Cedar", // 3
 		"Cocobolo", // 4
-		"Indian Rosewood", // 5 
+		"Indian_Rosewood", // 5 
 		"Mahogany", // 6
 		"Maple", // 7
 		"Sitka" // 8

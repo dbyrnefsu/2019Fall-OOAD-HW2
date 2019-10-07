@@ -15,7 +15,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar implements GuitarInterface {
+public class Guitar extends GuitarSpec {
 
 	/**
 	 * Full constructor
@@ -31,20 +31,54 @@ public class Guitar implements GuitarInterface {
 	 */
 	public Guitar(String serialNumber, 
 			double price, 
-			Manufacturer manufacturer, 
-			String model, 
-			Type type, 
-			Wood backWood,
-			Wood topWood,
-			Integer numStrings) {
-		  
+			String manufacturer,
+			String type, 
+			String model, 		
+			String backWood,
+			String topWood,
+			Integer numStrings) {		 
+		super(manufacturer, model, type, backWood, topWood, 0, price);
 		this.serialNumber = serialNumber;
 		this.price = price;
 		if (numStrings == null) this.numberOfStrings = 0;
-		else this.numberOfStrings = numStrings;
-		this.guitarSpec = new GuitarSpec(manufacturer,model,type,backwood,topwood,price);
+		else this.numberOfStrings = numStrings;	
+	}	
+
+	public boolean equals(Guitar guitar) {
+		if(!this.serialNumber.equals(guitar.serialNumber))
+			return false;
+		if(this.price != guitar.price) 
+			return false;
+		if(this.getManufacturer() != guitar.getManufacturer())
+			return false;
+		if(!this.getModel().equals(guitar.getModel()))
+			return false;
+		if(this.getType()  != guitar.getType() )
+			return false;
+		if(this.getTopWood() != guitar.getTopWood())
+			return false;
+		if(this.getBackWood() != guitar.getBackWood())
+			return false;
+		if(this.numberOfStrings != guitar.numberOfStrings)
+			return false;
+		return true;
 	}
-	
+
+	public boolean matches(GuitarSpec guitarSpec) {
+		if (guitarSpec.getGuitarManufacturer() != null && super.getGuitarManufacturer() != guitarSpec.getGuitarManufacturer())
+			return false;
+		else if (guitarSpec.getGuitarType() != null && super.getGuitarType() != guitarSpec.getGuitarType())
+			return false;
+		else if (guitarSpec.getGuitarTopWood() != null && super.getGuitarTopWood() != guitarSpec.getGuitarTopWood())
+			return false;
+		else if (guitarSpec.getGuitarBackWood() != null && super.getGuitarBackWood() != guitarSpec.getGuitarBackWood())
+			return false;		
+		else if (guitarSpec.getGuitarModel() != null && !guitarSpec.getGuitarModel().toUpperCase().equals(this.getModel().toUpperCase()))
+			return false;
+		else if (guitarSpec.getMinPrice() <= this.price && guitarSpec.getMaxPrice() <= this.price)
+			return false;
+		return true;
+	}
 
 	/**
 	 * Returns the manufacturer serial number
@@ -60,47 +94,76 @@ public class Guitar implements GuitarInterface {
 		return price;
 	}
 
-	/**
-	 * Sets the store price of the guitar
-	 */
 	public void setPrice(double newPrice) {
 		this.price = newPrice;
 	}
 
-	/**
-	 * Returns the name of the manufacturer
-	 */
-	public Manufacturer getManufacturer() {
-		return this.manufacturer;
+	public String getModel() {
+		return getGuitarModel();
+	}
+	
+	public Manufacturer getGuitarManufacturer() {		
+		return super.getGuitarManufacturer();
+	}
+
+	public Type getGuitarType() {
+		return super.getGuitarType();
+	}
+	
+	public Wood getGuitarTopWood() {
+		return super.getGuitarTopWood();
+	}
+
+	public Wood getGuitarBackWood() {
+		return super.getGuitarBackWood();
 	}
 
 	/**
 	 * Returns the manufacturer model
 	 */
-	public String getModel() {
-		return model;
+	public String getGuitarModel() {
+		return super.getGuitarModel();
+	}
+	
+	/**
+	 * Returns the name of the manufacturer
+	 */
+	public String getManufacturer() {
+		if(getGuitarManufacturer() == null)
+			return null;
+		
+		return getGuitarManufacturer().toString();		
 	}
 
 	/**
 	 * Returns the guitar type
 	 * @return
 	 */
-	public Type getType() {
-		return type;
+	public String getType() {
+		if(getGuitarType() == null)
+			return null;
+		
+		return getGuitarType().toString();
 	}
 
 	/**
 	 * Returns the type of wood used in the body
 	 */
-	public Wood getBackWood() {
-		return backWood;
+	public String getBackWood() {
+		if(getGuitarBackWood() == null)			
+			return null;
+		
+		return getGuitarBackWood().toString();
 	}
 
 	/**
 	 * Returns the type of wood used in the face
 	 */
-	public Wood getTopWood() {
-		return topWood;
+	public String getTopWood() {
+		if(getGuitarTopWood() == null)			
+			return null;
+		
+		return getGuitarTopWood().toString();
 	}
 	
 	/**
@@ -114,38 +177,13 @@ public class Guitar implements GuitarInterface {
 	 * Turn object into a readable string
 	 */
 	public String toString() {
-		return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
+		return String.format(toStringFormat, getManufacturer(), getModel(), getType(), numberOfStrings, getTopWood(), getBackWood(), price, serialNumber);
 	}
 
 	/**
 	 * The guitars manufacturer serial number
 	 */
-	private String serialNumber;
-
-	/**
-	 * The name of the manufacturer
-	 */
-	private Manufacturer manufacturer;
-
-	/**
-	 * The manufacturer model number
-	 */
-	private String model;
-
-	/**
-	 * The guitar type (electric/acoustic)
-	 */
-	private Type type;
-
-	/**
-	 * The wood used for the back of the guitar
-	 */
-	private Wood backWood;
-
-	/**
-	 * The wood used for the face of the guitar
-	 */
-	private Wood topWood;
+	private String serialNumber;	
 
 	/**
 	 * Rick's price for the guitar
@@ -156,14 +194,10 @@ public class Guitar implements GuitarInterface {
 	 * Guitars number of strings
 	 */
 	private int numberOfStrings;
-	/**
-	 * Guitar specification forthe class
-	 */
-	private GuitarSpec guitarSpec;
+
 
 	/**
 	 * Formatting string for toString()
 	 */
 	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
-
-	}
+}

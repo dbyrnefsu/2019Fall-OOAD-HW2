@@ -32,8 +32,8 @@ class GuitarTest {
 				"AB123", // serial number
 				203.35, // store price
 				"Gibson", // Manufacturer
-				"EasyLearn", // Manufacturer model
 				"electric", // Type of Guitar
+				"EasyLearn", // Manufacturer model			
 				"Maple", // Back wood
 				"Adirondack", // Face wood
 				6 // number of strings

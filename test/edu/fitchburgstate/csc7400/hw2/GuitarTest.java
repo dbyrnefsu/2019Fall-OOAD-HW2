@@ -3,8 +3,10 @@
  * Professor: Orlando Montalvo
  * Assignment: HW 2
  * 
- * Date: 2017-09-20
+ * Students: Abha Kumari, Divya Mallepally, Vineela Venula 
+ * Date: 2019-10-06
  */
+ 
 package edu.fitchburgstate.csc7400.hw2;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -77,7 +79,7 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getManufacturer() {
-		String expected = "Gibson";
+		String expected = "GIBSON";
 		String returned = this.testGuitar.getManufacturer();
 		assertEquals(expected, returned, String.format("Manufacturer %s != %s", expected, returned));
 	}
@@ -97,7 +99,7 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getType() {
-		String expected = "electric";
+		String expected = "ELECTRIC";
 		String returned = this.testGuitar.getType();
 		assertEquals(expected, returned, String.format("Type %s != %s", expected, returned));
 	}
@@ -107,7 +109,7 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getBackWood() {
-		String expected = "Maple";
+		String expected = "MAPLE";
 		String returned = this.testGuitar.getBackWood();
 		assertEquals(expected, returned, String.format("Back wood %s != %s", expected, returned));
 	}
@@ -117,7 +119,7 @@ class GuitarTest {
 	 */
 	@Test
 	void test_getTopWood() {
-		String expected = "Adirondack";
+		String expected = "ADIRONDACK";
 		String returned = this.testGuitar.getTopWood();
 		assertEquals(expected, returned, String.format("Top wood %s != %s", expected, returned));
 	}

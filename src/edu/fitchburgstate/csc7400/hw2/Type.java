@@ -5,7 +5,7 @@
  * Date:2019-10-06
  * 
  * 
- * @author kboppana
+ * @author kboppana and sana
  * 
  * 
  */
@@ -24,3 +24,6 @@ public enum Type {
 	  
 
 }
+/**
+* gets string value of the type enum value
+*/

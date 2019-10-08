@@ -3,7 +3,7 @@
 * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
+ * @authors priya and sana
  * Date: 2017-09-20
  */
 
@@ -50,7 +50,7 @@ import java.awt.event.KeyEvent;
 /**
  * GuitarRun provides a simple search interface for Rick's Guitars. It is meant for testing.
  * 
- * @author omontalv
+ * @author priya and sana
  *
  */
 public class GuitarSwingUI {

@@ -1,7 +1,7 @@
 /**
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
- * 
+ * students @ priya and sana
  * Assignment: HW 2
  * 
  * Date: 2019-10-06

@@ -2,8 +2,8 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
- * Date: 2018-09-03
+ * Student: Oleksandr (Alex) Koblosh
+ * Date: 10-7-2019
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -15,38 +15,80 @@ package edu.fitchburgstate.csc7400.hw2;
  * @author HeadFirstOODA
  *
  */
-public class Guitar {
+public class Guitar implements IGuitarInterface{
+
+	//gs object to hold the specifications of Guitar
+
+	private GuitarSpec gs;
+
 
 	/**
 	 * Full constructor
-	 * 
+	 *
 	 * @param serialNumber manufacturer serial number
 	 * @param price store price
 	 * @param manufacturer the guitar's manufacturer
-	 * @param model the manufacturers model
 	 * @param type guitar type (electric/acoustic)
+	 * @param model the manufacturers model
 	 * @param backWood the wood used for the guitar body
 	 * @param topWood the wood used for the guitar's face
 	 * @param numString the number of strings for this guitar
 	 */
 	public Guitar(String serialNumber,
-			double price,
-			String manufacturer,
-			String model,
-			String type,
-			String backWood,
-			String topWood,
-			Integer numStrings) {
+				  double price,
+				  Manufacturer manufacturer,
+				  Type type,
+				  String model,
+				  Wood backWood,
+				  Wood topWood,
+				  Integer numStrings) {
 		this.serialNumber = serialNumber;
-		this.price = price;
 		this.manufacturer = manufacturer;
 		this.model = model;
 		this.type = type;
+		this.price = price;
 		this.backWood = backWood;
 		this.topWood = topWood;
+		//Build a GuitarSpec object
+		gs = new GuitarSpec(this.manufacturer,
+				this.type,
+				this.backWood,
+				this.topWood,
+				this.model);
+
 		if (numStrings == null) this.numberOfStrings = 0;
 		else this.numberOfStrings = numStrings;
+
 	}
+
+	//Full constructor for conditions where original datataype values are sent as parameters
+	public Guitar(String serialNumber, double price, String manufacturer, String type, String model,
+				  String backWood, String topWood, Integer numStrings) {
+		if(manufacturer!=null) {
+			this.manufacturer = Manufacturer.valueOf(manufacturer);
+		}
+		if(type != null) {
+			this.type = Type.valueOf(type);
+		}
+		if(backWood != null) {
+			this.backWood = Wood.valueOf(backWood);
+		}
+		if(topWood != null) {
+			this.topWood = Wood.valueOf(topWood);
+		}
+		if(model != null) {
+			this.model = model;
+		}
+		gs = new GuitarSpec(this.manufacturer,
+				this.type,
+				this.backWood,
+				this.topWood,
+				this.model);
+		if (numStrings == null) this.numberOfStrings = 0;
+		else this.numberOfStrings = numStrings;
+
+	}
+
 
 	/**
 	 * Returns the manufacturer serial number
@@ -69,53 +111,37 @@ public class Guitar {
 		this.price = newPrice;
 	}
 
-	/**
-	 * Returns the name of the manufacturer
-	 */
-	public String getManufacturer() {
-		return this.manufacturer;
-	}
 
-	/**
-	 * Returns the manufacturer model
-	 */
-	public String getModel() {
-		return model;
-	}
-
-	/**
-	 * Returns the guitar type
-	 * @return
-	 */
-	public String getType() {
-		return type;
-	}
-
-	/**
-	 * Returns the type of wood used in the body
-	 */
-	public String getBackWood() {
-		return backWood;
-	}
-
-	/**
-	 * Returns the type of wood used in the face
-	 */
-	public String getTopWood() {
-		return topWood;
-	}
-	
-	/**
-	 * Returns the number of string for this guitar
+	/** Returns the number of string for this guitar
 	 */
 	public int getNumberOfStrings() {
 		return numberOfStrings;
+	}
+
+	public void setSpec(GuitarSpec spec)
+	{
+		this.gs = spec;
+	}
+
+	/**
+	 * Returns specifications of the guitar - GuitarSpec object
+	 *
+	 * @return GuitarSpec returns GuitarSpec object of a guitar
+	 */
+
+	public GuitarSpec getSpec()
+	{
+		return gs;
 	}
 
 	/**
 	 * Turn object into a readable string
 	 */
 	public String toString() {
+		/**
+		 * Formatting string for toString()
+		 */
+		String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
 		return String.format(toStringFormat, manufacturer, model, type, numberOfStrings, topWood, backWood, price, serialNumber);
 	}
 
@@ -127,7 +153,7 @@ public class Guitar {
 	/**
 	 * The name of the manufacturer
 	 */
-	private String manufacturer;
+	private Manufacturer manufacturer;
 
 	/**
 	 * The manufacturer model number
@@ -137,30 +163,99 @@ public class Guitar {
 	/**
 	 * The guitar type (electric/acoustic)
 	 */
-	private String type;
+	private Type type;
 
 	/**
 	 * The wood used for the back of the guitar
 	 */
-	private String backWood;
+	private Wood backWood;
 
 	/**
 	 * The wood used for the face of the guitar
 	 */
-	private String topWood;
+	private Wood topWood;
 
 	/**
 	 * Rick's price for the guitar
 	 */
 	private double price;
-	
+
 	/**
 	 * Guitars number of strings
 	 */
 	private int numberOfStrings;
 
-	/**
-	 * Formatting string for toString()
+	/** Match guitar with other guitar using different attributes/specifications
+	 * True if values are same
+	 * else, false is returned
+	 * @param g
+	 * @return true if match happens else false
 	 */
-	private static String toStringFormat = "Manufacturer: %s; Model:%s; Type:%s; Num String: %d; Top wood: %s; Back wood:%s; Price:%.2f; Serial Num:%s";
+	public boolean matches(GuitarSpec g) {
+		System.out.println("GuitarSpec for search: " + g.toString());
+		System.out.println("Current guitar:        " + this.toString());
+		if(g.getManufacturer()!=null && g.getManufacturer()!=this.manufacturer)
+			return false;
+		if(g.getType()!=null && g.getType()!=this.type)
+			return false;
+		if(g.getBackWood()!=null && g.getBackWood()!= this.backWood)
+			return false;
+		if(g.getTopWood()!=null && g.getTopWood()!= this.topWood)
+			return false;
+		return g.getModel() == null || g.getModel().equals(this.model);
+	}
+
+	/** Compares 2 guitars using different attributes
+	 * True if values are same
+	 * else, false is returned
+	 * @param other
+	 * @return
+	 */
+	public boolean equals(Guitar other) {
+		if(!this.serialNumber.equals(other.serialNumber))
+			return false;
+		if(this.price != other.price)
+			return false;
+		if(this.manufacturer != other.manufacturer)
+			return false;
+		if(!this.model.equals(other.model))
+			return false;
+		if(this.type != other.type)
+			return false;
+		if(this.topWood != other.topWood)
+			return false;
+		if(this.backWood != other.backWood)
+			return false;
+		if(this.numberOfStrings != other.numberOfStrings)
+			return false;
+		return true;
+	}
+	@Override
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	@Override
+	public Type getType() {
+		return type;
+	}
+
+	@Override
+	public Wood getBackWood() {
+		return backWood;
+	}
+
+	@Override
+	public Wood getTopWood() {
+		return topWood;
+	}
+
+
+	@Override
+	public String getModel() {
+		return model;
+	}
 }
+
+
+

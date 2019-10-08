@@ -2,8 +2,8 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
- * Date: 2017-09-20
+ * Student: Oleksandr (Alex) Koblosh
+ * Date: 10-7-2019
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -294,11 +294,9 @@ public class GuitarSwingUI {
 				String backWood = getChosen((String) backWoodComboBox.getSelectedItem());
 				String model = txtEnterModel.getText();
 				if (model != null && model.isEmpty()) model = null;
-				//double priceLow = (double) lowSpinner.getValue();
-				//double priceHigh = (double) highSpinner.getValue();
-				
-				Guitar searchGuitar = new Guitar(null, 0, manufacturer, type, model, topWood, backWood, 0);
-				Guitar matching = inventory.search(searchGuitar);
+
+				GuitarSpec searchGuitarSpec = new GuitarSpec(manufacturer, type, backWood, topWood, model);
+				List<Guitar> matching = inventory.search(searchGuitarSpec);
 
 				matchingGuitars.clear();
 				if (matching == null) {
@@ -386,7 +384,6 @@ public class GuitarSwingUI {
 	 * if the {@code Document} itself is replaced.
 	 * 
 	 * @param text any text component, such as a {@link JTextField}
-	 *        or {@link JTextArea}
 	 * @param changeListener a listener to receieve {@link ChangeEvent}s
 	 *        when the text is changed; the source object for the events
 	 *        will be the text component

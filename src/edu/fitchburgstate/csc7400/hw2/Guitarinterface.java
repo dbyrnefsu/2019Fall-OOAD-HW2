@@ -1,6 +1,7 @@
 package edu.fitchburgstate.csc7400.hw2;
 /**
 *@author sana and priya
+*/
 
 public interface Guitarinterface {
 	

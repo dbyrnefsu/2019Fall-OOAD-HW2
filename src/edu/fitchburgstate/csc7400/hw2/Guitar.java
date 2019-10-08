@@ -13,7 +13,7 @@ package edu.fitchburgstate.csc7400.hw2;
  * Guitar contains the information needed to keep track of a type of guitar from
  * Rick's music store
  * 
- * @author kboppana
+ * @author kboppana , @sana
  *
  */
 public class Guitar implements guitarinterface {

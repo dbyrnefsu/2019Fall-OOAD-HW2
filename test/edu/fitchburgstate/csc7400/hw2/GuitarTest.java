@@ -3,7 +3,7 @@
 
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
+ * student @ priya and sana
  * Date: 2017-09-20
  */
 package edu.fitchburgstate.csc7400.hw2;

@@ -2,8 +2,8 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
- * Date: 2018-09-03
+ * Student: Xia Jin, Akhila Lolam
+ * Date: 2019-10-03
  */
 
 package edu.fitchburgstate.csc7400.hw2;
@@ -19,7 +19,8 @@ package edu.fitchburgstate.csc7400.hw2;
 public class Guitar implements GuitarInterface{
 
 	/**
-	 * Full constructor
+	 * Full constructor 
+	 * Takes enums for manufacturers, type, backWood, and topWood
 	 * 
 	 * @param serialNumber manufacturer serial number
 	 * @param price store price
@@ -54,6 +55,19 @@ public class Guitar implements GuitarInterface{
 				this.model);
 	}
 
+	/**
+	 * Constructor
+	 * Takes String for manufacturers, type, backWood, and topWood
+	 * 
+	 * @param serialNumber manufacturer serial number
+	 * @param price store price
+	 * @param manufacturer the guitar's manufacturer
+	 * @param model the manufacturers model
+	 * @param type guitar type (electric/acoustic)
+	 * @param backWood the wood used for the guitar body
+	 * @param topWood the wood used for the guitar's face
+	 * @param numString the number of strings for this guitar
+	 */
 	public Guitar(String serialNumber, double price, String manufacturer, String type, String model, 
 			String backWood, String topWood, Integer numStrings) {
 		this.serialNumber = serialNumber;
@@ -70,7 +84,6 @@ public class Guitar implements GuitarInterface{
 				this.backWood, 
 				this.topWood, 
 				this.model);
-
 	}
 
 	/**
@@ -81,7 +94,7 @@ public class Guitar implements GuitarInterface{
 	}
 
 	/**
-	 * Returns store price of guitar
+	 * Returns the store price of the guitar
 	 */
 	public double getPrice() {
 		return price;
@@ -112,7 +125,6 @@ public class Guitar implements GuitarInterface{
 
 	/**
 	 * Returns the guitar type
-	 * @return
 	 */
 	@Override
 	public Type getType() {
@@ -136,14 +148,13 @@ public class Guitar implements GuitarInterface{
 	}
 	
 	/**
-	 * Returns the number of string for this guitar
+	 * Returns the number of string for the guitar
 	 */
 	public int getNumberOfStrings() {
 		return numberOfStrings;
 	}
 	/**
-	 * Returns the spec of the guitar
-	 * @return
+	 * Returns the specification of the guitar
 	 */
 	public GuitarSpec getGuitarSpec() {
 		return spec;
@@ -157,14 +168,16 @@ public class Guitar implements GuitarInterface{
 	}
 
 	/**
-	 * Compare with another guitar by comparing
+	 * Compares with another guitar by comparing
 	 * each and every of the following values:
 	 * serialNumber, price, manufacturer, model, 
 	 * type, backWood, topWood, numStrings.
 	 * If all values are the same, return true. 
-	 * If any values are not the same, return false.
+	 * If any value is not the same, return false.
+	 * 
+	 * @param other a guitar to compare
 	 * @return returns true if all values are the same,
-	 * returns false if not all values the same.
+	 * returns false if not all values are the same.
 	 */
 	public boolean equals(Guitar other) {
 		if(!this.serialNumber.equals(other.serialNumber))
@@ -187,14 +200,15 @@ public class Guitar implements GuitarInterface{
 	}
 	
 	/**
-	 * Match with other guitar specification by comparing
-	 * the following values if specified in other guitar specification: 
+	 * Matches with a guitar specification by comparing
+	 * the following values if specified in the guitar specification: 
 	 * manufacturer, type, backWood, topWood, model.
-	 * If any value is unspecified in other guitar specification, 
-	 * then will not compare this value.
-	 * @param otherSpec other guitar specification
-	 * @return return true if all specified values in other guitar specification are the same.
-	 * return false if any specified values in other guitar specification is not the same.
+	 * If a value is unspecified in the guitar specification, 
+	 * then will treat as a wildcard and will not compare this value.
+	 * 
+	 * @param otherSpec a guitar specification
+	 * @return returns true if all specified values in the guitar specification are the same.
+	 * returns false if any specified value in the guitar specification is not the same.
 	 */
 	public boolean matches(GuitarSpec otherSpec) {
 		System.out.println("GuitarSpec for search: " + otherSpec.toString());
@@ -211,8 +225,9 @@ public class Guitar implements GuitarInterface{
 			return false;
 		return true;
 	}
+	
 	/**
-	 * The guitars manufacturer serial number
+	 * The guitar's manufacturer serial number
 	 */
 	private String serialNumber;
 
@@ -247,12 +262,12 @@ public class Guitar implements GuitarInterface{
 	private double price;
 	
 	/**
-	 * Guitars number of strings
+	 * Guitar's number of strings
 	 */
 	private int numberOfStrings;
 
 	/**
-	 * The specification of this guitar
+	 * The specification of the guitar
 	 */
 	private GuitarSpec spec;
 	/**

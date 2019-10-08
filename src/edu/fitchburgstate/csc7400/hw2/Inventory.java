@@ -2,9 +2,10 @@
  * Class: Object-Oriented Design and Analysis
  * Professor: Orlando Montalvo
  * Assignment: HW 2
- * 
- * Date: 2017-09-20
+ * Student: Xia Jin, Akhila Lolam
+ * Date: 2019-10-03
  */
+
 package edu.fitchburgstate.csc7400.hw2;
 
 import java.util.Iterator;
@@ -29,8 +30,7 @@ public class Inventory {
 	/**
 	 * Adds a guitar to the inventory
 	 * 
-	 * @param guitar
-	 *            a fully qualified guitar
+	 * @param guitar a fully qualified guitar
 	 */
 	public void addGuitar(Guitar guitar) {
 		guitars.add(guitar);
@@ -39,22 +39,14 @@ public class Inventory {
 	/**
 	 * Adds a new guitar to the inventory given all the guitars information.
 	 * 
-	 * @param serialNumber
-	 *            the guitars manufacturer serial number
-	 * @param price
-	 *            the customer price
-	 * @param manufacturer
-	 *            the guitar's manufacturer, enum Manufacturer
-	 * @param model
-	 *            the manufacturer model id
-	 * @param type
-	 *            type of guitar
-	 * @param backWood
-	 *            wood used in back of guitar
-	 * @param topWood
-	 *            wood used in front of guitar
-	 * @param numStrings
-	 *            the number of strings
+	 * @param serialNumber the guitars manufacturer serial number
+	 * @param price the customer price
+	 * @param manufacturer the guitar's manufacturer, enum Manufacturer
+	 * @param model the manufacturer model id
+	 * @param type the type of guitar
+	 * @param backWood the wood used in back of guitar
+	 * @param topWood the wood used in front of guitar
+	 * @param numStrings the number of strings
 	 * 
 	 * @precondition serialNumber is not empty
 	 * @precondition price > 0
@@ -80,15 +72,18 @@ public class Inventory {
 		this.addGuitar(guitar);
 	}
 	/**
-	 * Constructor, input value for manufacturer, type, backWood, topWood are strings instead of enum types
-	 * @param serialNumber
-	 * @param price
-	 * @param manufacturer
-	 * @param model
-	 * @param type
-	 * @param backWood
-	 * @param topWood
-	 * @param numStrings
+	 * Adds a new guitar to the inventory given all the guitars information.
+	 * Takes String type for manufacturer, type, backWood, and topWood
+	 * 
+	 * @param serialNumber the guitars manufacturer serial number
+	 * @param price the customer price
+	 * @param manufacturer the guitar's manufacturer, enum Manufacturer
+	 * @param model the manufacturer model id
+	 * @param type the type of guitar
+	 * @param backWood the wood used in back of guitar
+	 * @param topWood the wood used in front of guitar
+	 * @param numStrings the number of strings
+	 * 
 	 */
 	public void addGuitar(String serialNumber, double price, String manufacturer, String model, String type,
 			String backWood, String topWood, Integer numStrings) {
@@ -102,14 +97,13 @@ public class Inventory {
 		assert numStrings >= 0;
 			
 		Guitar guitar = new Guitar(serialNumber, price, manufacturer, model, type, backWood, topWood, numStrings);
-		this.addGuitar(guitar);
-		
+		this.addGuitar(guitar);		
 	}
+	
 	/**
-	 * Finds and returns a guitar that has the provided serial number
+	 * Finds a guitar that has the provided serial number
 	 * 
-	 * @param serialNumber
-	 *            serial number of guitar
+	 * @param serialNumber the serial number of a guitar
 	 * @return the guitar with the correct serial number, or null if not found
 	 */
 	public Guitar getGuitar(String serialNumber) {
@@ -123,29 +117,26 @@ public class Inventory {
 	}
 
 	/**
-	 * Finds and returns an inventory of guitars that matches a guitar spec. 
-	 * Any null in spec are consider wildcards.
+	 * Finds and returns a list of guitars that matches a guitar specification. 
+	 * Any null in the guitar specification is consider as wildcard.
 	 * 
-	 * @param searchGuitar
-	 *            the guitar with qualities we want to match
-	 * @return the found guitar, may be null
+	 * @param searchSpec the guitar specification we want to match
+	 * @return returns a list of guitars that matches the guitar specification, 
+	 * returns null if no matched guitar found 
 	 */
 	public List<Guitar> search(GuitarSpec searchSpec) {
-		List<Guitar> matchedGuitars = new LinkedList<Guitar>();
+		List<Guitar> matchingGuitars = new LinkedList<Guitar>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar) i.next();
 			// Ignore serial number since that's unique
 			// Ignore price since that's unique
 			if (guitar.getGuitarSpec().matches(searchSpec))
-				matchedGuitars.add(guitar);
-		
+				matchingGuitars.add(guitar);	
 		}
-		if(matchedGuitars.size()>0)
-			return matchedGuitars;
+		if(matchingGuitars.size()>0)
+			return matchingGuitars;
 		else return null;
 	}
 
 	private List<Guitar> guitars; // guitar inventory
-
-
 }

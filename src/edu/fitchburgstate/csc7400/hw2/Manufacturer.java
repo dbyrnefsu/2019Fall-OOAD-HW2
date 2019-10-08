@@ -1,6 +1,7 @@
 /**
  * class: Object oriented analysis and design
  * professor: Orlando montalvo
+ * student @ sana and priya
  * Assignment:Homework2
  * 
  *  Date:2019-10-06
@@ -20,3 +21,6 @@ public enum Manufacturer {
 	     PRS
 
 }
+/**
+* gets string values of the manufacturer enum values
+*/

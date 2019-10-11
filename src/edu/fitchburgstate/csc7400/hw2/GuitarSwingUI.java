@@ -109,8 +109,9 @@ public class GuitarSwingUI {
 	 * @return the chosen value or null if wild card was chosen
 	 */
 	private String getChosen(String chosen) {
-		if (WILD_CARD.equals(chosen)) return null;
-		else return chosen;
+	//	if (WILD_CARD.equals(chosen)) return null;
+	//	else return chosen;
+return chosen;
 	}
 
 	/**
@@ -305,11 +306,15 @@ public class GuitarSwingUI {
 					setNotFound();
 				}
 				else {
-					setFound(1);
-					matchingGuitars.addElement(matching.toString());
+					setFound(Integer.valueOf((matching.size())));
+
+matching.forEach(m -> matchingGuitars.addElement(m.toString()));
+
+					//matchingGuitars.addElement(matching.toString());
+
 				}
-			}
-		});
+
+			}		});
 		questionPane.add(btnSearch); //$NON-NLS-1$
 		
 		btnStop = new JButton(Messages.getString("GuitarRun.btnStop.text")); //$NON-NLS-1$

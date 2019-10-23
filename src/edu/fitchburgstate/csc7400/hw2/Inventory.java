@@ -101,14 +101,16 @@ public class Inventory {
 	 * Searches inventory and returns guitar matching a guitar spec.
 	 *
 	 * @param gs Guitarspec object with given properties
+	 * @param priceHigh
+	 * @param priceLow
 	 * @return Guitar Guitar object that matches given guitar, null if not found
 	 */
-	public List<Guitar> search(GuitarSpec gs) {
+	public List<Guitar> search(GuitarSpec gs, double priceLow, double priceHigh) {
 		List<Guitar> matchedList = new LinkedList<Guitar>();
 		for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
 			Guitar guitar = (Guitar)i.next();
 			GuitarSpec guitarSpec = guitar.getSpec();
-			if (guitarSpec.matches(gs))
+			if (guitarSpec.matches(gs) && priceLow<=guitar.getPrice() && priceHigh>=guitar.getPrice())
 				matchedList.add(guitar);
 
 		}

@@ -1,0 +1,11 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - GuitarSwingUI",
+            "request": "launch",
+            "mainClass": "edu.fitchburgstate.csc7400.hw2.GuitarSwingUI",
+            "projectName": "2019Fall-OOAD-HW2_242205f2"
+        }
+    ]
+}
